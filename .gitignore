@@ -4,9 +4,9 @@
 ##
 ## Get latest from https://github.com/github/gitignore/blob/main/VisualStudio.gitignore
 
-Kou Pro/Editors/OdlEditorButton.xaml
-Kou Pro/Editors/OdlEditorButton.xaml.cs
+
 Build/
+Publish/
 
 *.sln
 
