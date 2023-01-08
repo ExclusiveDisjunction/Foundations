@@ -6,33 +6,106 @@
       {
         "id": "39c5e5312007dea1",
         "type": "tabs",
+        "dimension": 61.611675126903556,
         "children": [
           {
-            "id": "cd6b10c5bd068487",
+            "id": "4c84a4ff85348085",
             "type": "leaf",
             "state": {
-              "type": "empty",
-              "state": {}
+              "type": "markdown",
+              "state": {
+                "file": "Controls/Styles & Visual States.md",
+                "mode": "source",
+                "source": false
+              }
             }
           },
           {
-            "id": "aeeb97702ff49062",
+            "id": "73bb6bf47767d343",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Custom Controls/How to Create a Custom Control.md",
+                "mode": "source",
+                "source": false
+              }
+            }
+          },
+          {
+            "id": "79677936dbf2f58c",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Controls/Common Controls.md",
+                "mode": "source",
+                "source": false
+              }
+            }
+          },
+          {
+            "id": "9fee26ce4d6cbbd8",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Windows/Window Management System.md",
+                "mode": "source",
+                "source": false
+              }
+            }
+          },
+          {
+            "id": "842677bf29e71deb",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Controls/Common Controls.md",
+                "mode": "source",
+                "source": false
+              }
+            }
+          },
+          {
+            "id": "d20ffc740da388e6",
             "type": "leaf",
             "state": {
               "type": "canvas",
               "state": {
                 "file": "Untitled.canvas",
                 "viewState": {
-                  "x": -18.92133285512469,
-                  "y": -3.2646571424340163,
-                  "zoom": 1.1102230246251565e-16,
+                  "x": -784.5,
+                  "y": 221.5,
+                  "zoom": -1.6415108203642388,
                   "snapToGrid": false
                 }
               }
             }
           },
           {
-            "id": "4c84a4ff85348085",
+            "id": "54f4c21a4926de91",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Windows/Footer Host.md",
+                "mode": "source",
+                "source": false
+              }
+            }
+          }
+        ],
+        "currentTab": 6
+      },
+      {
+        "id": "b1e776ffc564ca75",
+        "type": "tabs",
+        "dimension": 38.388324873096444,
+        "children": [
+          {
+            "id": "daa2d7cae88afa46",
             "type": "leaf",
             "state": {
               "type": "markdown",
@@ -42,21 +115,8 @@
                 "source": false
               }
             }
-          },
-          {
-            "id": "772df79f35cf1feb",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "Control & UI Base Classes.md",
-                "mode": "source",
-                "source": false
-              }
-            }
           }
-        ],
-        "currentTab": 3
+        ]
       }
     ],
     "direction": "vertical"
@@ -122,7 +182,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Control & UI Base Classes.md",
+                "file": "Windows/Footer Host.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -139,7 +199,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Control & UI Base Classes.md",
+                "file": "Windows/Footer Host.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -162,7 +222,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Control & UI Base Classes.md"
+                "file": "Windows/Footer Host.md"
               }
             }
           }
@@ -183,9 +243,15 @@
       "command-palette:Open command palette": false
     }
   },
-  "active": "772df79f35cf1feb",
+  "active": "54f4c21a4926de91",
   "lastOpenFiles": [
+    "Untitled.canvas",
+    "Controls/Common Controls.md",
+    "Windows/Window Management System.md",
+    "Custom Controls/How to Create a Custom Control.md",
+    "Controls/Styles & Visual States.md",
+    "Controls/Control & UI Base Classes.md",
     "UI Roadmap.md",
-    "Untitled.canvas"
+    "Untitled 1.canvas"
   ]
 }
