@@ -267,6 +267,9 @@
     <ClInclude Include="Editors\Window\Window.h" />
     <ClInclude Include="IO\FileInstance.h" />
     <ClInclude Include="IO\IOCommon.h" />
+    <ClInclude Include="IO\Timelines\ActionBase.h" />
+    <ClInclude Include="IO\Timelines\ActionID.h" />
+    <ClInclude Include="IO\Timelines\Timeline.h" />
     <ClInclude Include="Types\BasicObject.h" />
     <ClInclude Include="CharDelem.h" />
     <ClInclude Include="Color.h" />

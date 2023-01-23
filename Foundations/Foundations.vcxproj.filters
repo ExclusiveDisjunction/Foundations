@@ -126,6 +126,15 @@
     <ClInclude Include="IO\FileInstance.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="IO\Timelines\ActionBase.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="IO\Timelines\Timeline.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="IO\Timelines\ActionID.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="dllmain.cpp">
