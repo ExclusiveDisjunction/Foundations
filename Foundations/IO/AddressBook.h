@@ -2,6 +2,7 @@
 
 #include "IOCommon.h"
 #include "AddressRecord.h"
+#include "ReductionLevel.h"
 
 namespace Foundations::IO
 {
@@ -11,9 +12,11 @@ namespace Foundations::IO
 	{
 	private:
 		AddressRecord* _Current;
+		Reference* _RefObject = nullptr;
 
 	public:
 		ForwardAddressIterator(AddressRecord* Current);
+		~ForwardAddressIterator();
 
 		/// <summary>
 		/// Returns a reference to the current node.
@@ -42,9 +45,11 @@ namespace Foundations::IO
 	{
 	private:
 		AddressRecord* _Current;
+		Reference* _RefObject;
 
 	public:
 		TreeAddressIterator(AddressRecord* Current);
+		~TreeAddressIterator();
 
 		/// <summary>
 		/// Returns a reference to the current compoennt.
@@ -76,13 +81,6 @@ namespace Foundations::IO
 		/// </summary>
 		/// <returns>False if the current node is a leaf node or if the iterator is not valid.</returns>
 		bool Decend();
-	};
-
-	enum ReductionLevel
-	{
-		Flat = 0,
-		Cached = 1,
-		Loaded = 2
 	};
 
 	class CoreMember AddressBook

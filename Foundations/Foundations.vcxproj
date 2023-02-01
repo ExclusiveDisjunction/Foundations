@@ -274,6 +274,7 @@
     <ClInclude Include="IO\PHS\PHS.h" />
     <ClInclude Include="IO\PHS\PHSReader.h" />
     <ClInclude Include="IO\PHS\PHSWriter.h" />
+    <ClInclude Include="IO\ReductionLevel.h" />
     <ClInclude Include="IO\Reference.h" />
     <ClInclude Include="IO\Timelines\ActionBase.h" />
     <ClInclude Include="IO\Timelines\ActionID.h" />
@@ -315,6 +316,7 @@
     <ClCompile Include="IO\FileInstance.cpp" />
     <ClCompile Include="IO\ForwardAddressIterator.cpp" />
     <ClCompile Include="IO\IOCommon.cpp" />
+    <ClCompile Include="IO\Reference.cpp" />
     <ClCompile Include="IO\TreeAddressIterator.cpp" />
     <ClCompile Include="Types\Boolean.cpp" />
     <ClCompile Include="Color.cpp" />

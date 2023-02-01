@@ -8,11 +8,17 @@ namespace Foundations::IO
 	ForwardAddressIterator::ForwardAddressIterator(AddressRecord* Current)
 	{
 		this->_Current = Current;
+		this->_RefObject = _Current ? _Current->Reference() : nullptr;
+	}
+	ForwardAddressIterator::~ForwardAddressIterator()
+	{
+		if (_RefObject)
+			_RefObject->DeReference();
 	}
 
 	Reference* ForwardAddressIterator::Current() const
 	{
-		return _Current ? _Current->Reference() : nullptr;
+		return _RefObject;
 	}
 	bool ForwardAddressIterator::IsValid() const
 	{
@@ -28,6 +34,11 @@ namespace Foundations::IO
 				return false;
 		}
 
+		if (_RefObject)
+			_RefObject->DeReference();
+		if (_Current)
+			_RefObject = _Current->Reference();
+
 		return IsValid();
 	}
 	bool ForwardAddressIterator::Retreat()
@@ -39,6 +50,11 @@ namespace Foundations::IO
 			else
 				return false;
 		}
+
+		if (_RefObject)
+			_RefObject->DeReference();
+		if (_Current)
+			_RefObject = _Current->Reference();
 
 		return IsValid();
 	}

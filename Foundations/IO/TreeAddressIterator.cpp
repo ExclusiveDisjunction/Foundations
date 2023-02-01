@@ -8,11 +8,17 @@ namespace Foundations::IO
 	TreeAddressIterator::TreeAddressIterator(AddressRecord* Current)
 	{
 		_Current = Current;
+		_RefObject = _Current->Reference();
+	}
+	TreeAddressIterator::~TreeAddressIterator()
+	{
+		if (_RefObject)
+			_RefObject->DeReference();
 	}
 
 	Reference* TreeAddressIterator::Current() const
 	{
-		return _Current->Reference();
+		return _RefObject;
 	}
 	bool TreeAddressIterator::IsValid() const
 	{
@@ -29,6 +35,11 @@ namespace Foundations::IO
 				_Current = _Current->_NextT;
 		}
 
+		if (_RefObject)
+			_RefObject->DeReference();
+		if (_Current)
+			_RefObject = _Current->Reference();
+
 		return IsValid();
 	}
 	bool TreeAddressIterator::Retreat()
@@ -40,6 +51,11 @@ namespace Foundations::IO
 			else
 				_Current = _Current->_PrevT;
 		}
+
+		if (_RefObject)
+			_RefObject->DeReference();
+		if (_Current)
+			_RefObject = _Current->Reference();
 
 		return IsValid();
 	}
@@ -54,6 +70,11 @@ namespace Foundations::IO
 				return false;
 		}
 
+		if (_RefObject)
+			_RefObject->DeReference();
+		if (_Current)
+			_RefObject = _Current->Reference();
+
 		return IsValid();
 	}
 	bool TreeAddressIterator::Decend()
@@ -65,6 +86,11 @@ namespace Foundations::IO
 			else
 				return false;
 		}
+
+		if (_RefObject)
+			_RefObject->DeReference();
+		if (_Current)
+			_RefObject = _Current->Reference();
 
 		return IsValid();
 	}

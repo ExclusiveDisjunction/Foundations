@@ -2,6 +2,7 @@
 
 #include "IOCommon.h"
 #include "Address.h"
+#include "ReductionLevel.h"
 
 namespace Foundations::IO
 {
@@ -18,9 +19,9 @@ namespace Foundations::IO
 	private:
 		AddressBook* _Owner;
 		
-		AddressRecord* _NextF = nullptr, *_PrevF = nullptr;
-		AddressRecord* _ParentT = nullptr, * _NextT = nullptr, * _PrevT = nullptr;
-		AddressRecord* _FirstCT = nullptr, _LastCT = nullptr;
+		AddressRecord* _NextF = nullptr, *_PrevF = nullptr; //The next and previous siblings in the forward list.
+		AddressRecord* _ParentT = nullptr, * _NextT = nullptr, * _PrevT = nullptr; //The parent of the node, and then the next and previous sibling.
+		AddressRecord* _FirstCT = nullptr, *_LastCT = nullptr; //The first and last child of the node.
 
 		Address _ID;
 		Component* _Data;
@@ -39,12 +40,13 @@ namespace Foundations::IO
 		friend AddressBook;
 		friend ForwardAddressIterator;
 		friend TreeAddressIterator;
+		friend Reference;
+
+		void Reduce(ReductionLevel Level);
+		ReductionLevel State() const;
 
 		Address ID() const { return _ID; }
 		Component* const& Data = _Data;
-		Reference* Reference()
-		{
-
-		}
+		Reference* Reference();
 	};
 }
