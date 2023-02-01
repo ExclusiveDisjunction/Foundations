@@ -265,8 +265,16 @@
     <ClInclude Include="Editors\EditorRegistry.h" />
     <ClInclude Include="Editors\Window\SideHost.h" />
     <ClInclude Include="Editors\Window\Window.h" />
+    <ClInclude Include="IO\Address.h" />
+    <ClInclude Include="IO\AddressBook.h" />
+    <ClInclude Include="IO\AddressRecord.h" />
+    <ClInclude Include="IO\Component.h" />
     <ClInclude Include="IO\FileInstance.h" />
     <ClInclude Include="IO\IOCommon.h" />
+    <ClInclude Include="IO\PHS\PHS.h" />
+    <ClInclude Include="IO\PHS\PHSReader.h" />
+    <ClInclude Include="IO\PHS\PHSWriter.h" />
+    <ClInclude Include="IO\Reference.h" />
     <ClInclude Include="IO\Timelines\ActionBase.h" />
     <ClInclude Include="IO\Timelines\ActionID.h" />
     <ClInclude Include="IO\Timelines\Timeline.h" />
@@ -305,7 +313,9 @@
     <ClCompile Include="Editors\EditorRegistry.cpp" />
     <ClCompile Include="Editors\Window\SideHost.cpp" />
     <ClCompile Include="IO\FileInstance.cpp" />
+    <ClCompile Include="IO\ForwardAddressIterator.cpp" />
     <ClCompile Include="IO\IOCommon.cpp" />
+    <ClCompile Include="IO\TreeAddressIterator.cpp" />
     <ClCompile Include="Types\Boolean.cpp" />
     <ClCompile Include="Color.cpp" />
     <ClCompile Include="DateTime.cpp" />

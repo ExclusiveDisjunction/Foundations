@@ -20,6 +20,7 @@ namespace Foundations::IO
 		FileInstance(String const& Path);
 		FileInstance(const FileInstance& Other) = delete;
 		FileInstance(FileInstance&& Other) noexcept = delete;
+		~FileInstance();
 
 		FileInstance& operator=(const FileInstance& Other) = delete;
 		FileInstance& operator=(FileInstance&& Other) noexcept = delete;
