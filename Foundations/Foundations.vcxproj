@@ -313,6 +313,7 @@
     <ClCompile Include="Editors\EditorPopout.cpp" />
     <ClCompile Include="Editors\EditorRegistry.cpp" />
     <ClCompile Include="Editors\Window\SideHost.cpp" />
+    <ClCompile Include="HashList.cpp" />
     <ClCompile Include="IO\FileInstance.cpp" />
     <ClCompile Include="IO\ForwardAddressIterator.cpp" />
     <ClCompile Include="IO\IOCommon.cpp" />
