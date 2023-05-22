@@ -6,7 +6,7 @@
 
 #define ComboBox_SetNewText 0x401
 
-namespace Foundations::UI::Controls
+namespace Core::UI::Controls
 {
 	struct ComboBoxWndInfo
 	{

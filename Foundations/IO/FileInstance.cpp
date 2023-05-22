@@ -1,6 +1,6 @@
 #include "FileInstance.h"
 
-namespace Foundations::IO
+namespace Core::IO
 {
 	FileInstance::FileInstance()
 	{

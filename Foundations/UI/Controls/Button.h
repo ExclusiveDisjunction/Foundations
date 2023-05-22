@@ -2,9 +2,9 @@
 
 #include "Control.h"
 
-namespace Foundations::UI::Controls
+namespace Core::UI::Controls
 {
-	class CoreMember Button : public StyledControl
+	class CORE_API Button : public StyledControl
 	{
 	protected:
 		String _Text;

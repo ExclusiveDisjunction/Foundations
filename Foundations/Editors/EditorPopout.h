@@ -6,9 +6,9 @@
 #include "..\UI\Controls.h"
 #include "..\UI\UICommon.h"
 
-namespace Foundations::Editors
+namespace Core::Editors
 {
-	class CoreMember EditorPopout : public EditorHost
+	class CORE_API EditorPopout : public EditorHost
 	{
 	private:
 		static ATOM _ThisAtom;

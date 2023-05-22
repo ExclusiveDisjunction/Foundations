@@ -5,9 +5,9 @@
 #include "..\Controls\Grid.h"
 #include "..\..\Str.h"
 
-namespace Foundations::UI::Windows
+namespace Core::UI::Windows
 {
-	class CoreMember FooterHost
+	class CORE_API FooterHost
 	{
 	protected:
 		Controls::Grid* Footer;

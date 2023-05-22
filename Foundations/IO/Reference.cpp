@@ -3,7 +3,7 @@
 #include "AddressRecord.h"
 #include "Component.h"
 
-namespace Foundations::IO
+namespace Core::IO
 {
 	Reference::Reference(AddressRecord* Record)
 	{

@@ -1,6 +1,6 @@
 #include "Label.h"
 
-namespace Foundations::UI::Controls
+namespace Core::UI::Controls
 {
 	Label::Label(int X, int Y, int Width, int Height, HWND Window, HINSTANCE ins, String Text, AaColor BaseBk, TextStyleSheet Style, bool ShowScroll)
 	{

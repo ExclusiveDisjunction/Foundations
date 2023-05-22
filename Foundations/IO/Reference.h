@@ -3,13 +3,13 @@
 #include "IOCommon.h"
 #include "ReductionLevel.h"
 
-namespace Foundations::IO
+namespace Core::IO
 {
-	class CoreMember Component;
-	class CoreMember AddressRecord;
-	class CoreMember FileInstance;
+	class CORE_API Component;
+	class CORE_API AddressRecord;
+	class CORE_API FileInstance;
 
-	class CoreMember Reference
+	class CORE_API Reference
 	{
 	private:
 		AddressRecord* Parent = nullptr;

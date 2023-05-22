@@ -5,7 +5,7 @@
 #include <gdiplus.h>
 #pragma comment(lib, "Gdiplus.lib")
 
-namespace Foundations
+namespace Core
 {
 	AaColor::AaColor() : _Value(0)
 	{

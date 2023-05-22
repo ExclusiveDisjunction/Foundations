@@ -15,7 +15,7 @@
 //	}
 //}
 
-namespace Foundations
+namespace Core
 {
 	enum class DateStringFormat
 	{
@@ -26,7 +26,7 @@ namespace Foundations
 		Duration = 4
 	};
 
-	class CoreMember DateTime : public BasicObject
+	class CORE_API DateTime : public BasicObject
 	{
 	private:
 		std::chrono::duration<double> _Dur;

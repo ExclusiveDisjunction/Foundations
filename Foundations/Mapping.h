@@ -8,7 +8,7 @@
 #ifndef Mapping_Type_Def
 #define Mapping_Type_Def
 
-namespace Foundations
+namespace Core
 {
 	template<typename TKey, typename TValue> class Mapping;
 	class MappingB;

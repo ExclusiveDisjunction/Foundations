@@ -6,7 +6,7 @@
 #include "..\UI\Controls\StyleButton.h"
 #include "..\UI\UICommon.h"
 
-namespace Foundations::Editors
+namespace Core::Editors
 {
 	
 	using namespace IO;

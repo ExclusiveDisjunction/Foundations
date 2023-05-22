@@ -1,6 +1,6 @@
 #include "StyleButton.h"
 
-namespace Foundations::UI::Controls
+namespace Core::UI::Controls
 {
 	LRESULT StyleButton::Paint()
 	{

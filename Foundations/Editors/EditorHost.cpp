@@ -2,7 +2,7 @@
 
 #include "Editor.h"
 
-namespace Foundations::Editors
+namespace Core::Editors
 {
 	void EditorHost::ProcessOpenEditor(Editor* New)
 	{

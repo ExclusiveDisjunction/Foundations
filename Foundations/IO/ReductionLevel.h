@@ -1,6 +1,6 @@
 #pragma once
 
-namespace Foundations::IO
+namespace Core::IO
 {
 	enum ReductionLevel
 	{

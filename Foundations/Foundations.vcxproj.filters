@@ -272,8 +272,5 @@
     <ClCompile Include="IO\Reference.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="HashList.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
   </ItemGroup>
 </Project>

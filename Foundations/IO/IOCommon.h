@@ -4,9 +4,9 @@
 #include "..\Common.h"
 #include "..\Str.h"
 
-namespace Foundations::IO
+namespace Core::IO
 {
-	class CoreMember FileInstance;
+	class CORE_API FileInstance;
 
 	static FileInstance* LoadedProject;
 }

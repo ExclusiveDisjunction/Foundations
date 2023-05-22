@@ -2,9 +2,9 @@
 
 #include "..\IOCommon.h"
 
-namespace Foundations::IO::Timelines
+namespace Core::IO::Timelines
 {
-	class CoreMember Timeline;
+	class CORE_API Timeline;
 
 	struct ActionID
 	{

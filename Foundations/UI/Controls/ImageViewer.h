@@ -2,9 +2,9 @@
 
 #include "Control.h"
 
-namespace Foundations::UI::Controls
+namespace Core::UI::Controls
 {
-	class CoreMember ImageViewer : public Control
+	class CORE_API ImageViewer : public Control
 	{
 	private:
 		HGLOBAL _Target;

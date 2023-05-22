@@ -5,9 +5,9 @@
 #define ACTB_UNCHECK WM_USER + 3
 #define ACTB_CHECK WM_USER + 4
 
-namespace Foundations::UI::Controls
+namespace Core::UI::Controls
 {
-	class CoreMember ToggleButton : public StyledControl
+	class CORE_API ToggleButton : public StyledControl
 	{
 	private:
 		bool _HasMouse, _Checked, _Multi;

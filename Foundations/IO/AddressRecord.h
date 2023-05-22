@@ -4,17 +4,17 @@
 #include "Address.h"
 #include "ReductionLevel.h"
 
-namespace Foundations::IO
+namespace Core::IO
 {
-	class CoreMember AddressBook;
-	class CoreMember Component;
-	class CoreMember FileInstance;
-	class CoreMember Reference;
+	class CORE_API AddressBook;
+	class CORE_API Component;
+	class CORE_API FileInstance;
+	class CORE_API Reference;
 
-	class CoreMember ForwardAddressIterator;
-	class CoreMember TreeAddressIterator;
+	class CORE_API ForwardAddressIterator;
+	class CORE_API TreeAddressIterator;
 
-	class CoreMember AddressRecord
+	class CORE_API AddressRecord
 	{
 	private:
 		AddressBook* _Owner;

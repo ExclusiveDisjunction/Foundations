@@ -2,7 +2,7 @@
 
 #include "..\Str.h"
 
-namespace Foundations
+namespace Core
 {
 	Double::Double() : Value(0) {}
 	Double::Double(double Value) : Value(Value) {}

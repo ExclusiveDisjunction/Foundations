@@ -1,6 +1,6 @@
 #include "FooterHost.h"
 
-namespace Foundations::UI::Windows
+namespace Core::UI::Windows
 {
 	void FooterHost::SetFooterText(const String& Text, int Delay)
 	{

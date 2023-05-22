@@ -1,6 +1,6 @@
 #include "ToggleButton.h"
 
-namespace Foundations::UI::Controls
+namespace Core::UI::Controls
 {
 	ToggleButton::ToggleButton(int XCoord, int YCoord, int Width, int Height, HWND Parent, HINSTANCE ins, HMENU ID, String Text, bool Multiselect, StyleSheet Style, TextStyleSheet TextStyle, bool CheckState)
 	{

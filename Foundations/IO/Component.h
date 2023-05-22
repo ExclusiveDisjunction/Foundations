@@ -2,13 +2,13 @@
 
 #include "IOCommon.h"
 
-namespace Foundations::IO
+namespace Core::IO
 {
-	class CoreMember AddressRecord;
-	class CoreMember Reference;
-	class CoreMember FileInstance;
+	class CORE_API AddressRecord;
+	class CORE_API Reference;
+	class CORE_API FileInstance;
 
-	class CoreMember Component
+	class CORE_API Component
 	{
 	public:
 		Component() = delete;

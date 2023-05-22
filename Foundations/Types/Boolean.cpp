@@ -2,7 +2,7 @@
 
 #include "..\Str.h"
 
-namespace Foundations
+namespace Core
 {
 	Boolean::Boolean() : Value(0) {}
 	Boolean::Boolean(bool Value) : Value(Value) {}

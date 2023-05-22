@@ -16,7 +16,7 @@
 #include "Controls\ImageViewer.h"
 #include "Controls\CalendarGrid.h"
 
-namespace Foundations::UI::Controls
+namespace Core::UI::Controls
 {
 	using ControlList = Vector<Control*>;
 }

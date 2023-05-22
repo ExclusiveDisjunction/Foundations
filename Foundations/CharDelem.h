@@ -2,7 +2,7 @@
 
 #include <iostream>
 
-namespace Foundations
+namespace Core
 {
 	template<char D>
 	struct CharDelem : std::ctype<char>

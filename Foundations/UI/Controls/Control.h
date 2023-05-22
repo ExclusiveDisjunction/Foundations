@@ -10,10 +10,10 @@
 #error Win32 or Win64 is required, and the code must be compled in C++
 #endif
 
-namespace Foundations::UI::Controls
+namespace Core::UI::Controls
 {
-    String CoreMember GetText(HWND Window);
-    void CoreMember SetText(HWND Window, String New);
+    String CORE_API GetText(HWND Window);
+    void CORE_API SetText(HWND Window, String New);
 
     enum TextAlignment
     {
@@ -22,7 +22,7 @@ namespace Foundations::UI::Controls
         TA_RightAlignment
     };
 
-    struct CoreMember StyleSheet
+    struct CORE_API StyleSheet
     {
         StyleSheet()
         {
@@ -38,7 +38,7 @@ namespace Foundations::UI::Controls
         int BorderThickness;
         int Radius;
     };
-    struct CoreMember TextStyleSheet
+    struct CORE_API TextStyleSheet
     {
         AaColor Foreground = 0xFFFFFFFF;
         String FontFamily;
@@ -50,7 +50,7 @@ namespace Foundations::UI::Controls
         TextAlignment Alignment = TextAlignment::TA_LeftAlignment;
     };
 
-    class CoreMember Control
+    class CORE_API Control
     {
     protected:
         HWND _Base = nullptr;
@@ -95,7 +95,7 @@ namespace Foundations::UI::Controls
         }
     };
 
-    class CoreMember StyledControl : public Control
+    class CORE_API StyledControl : public Control
     {
     protected:
         StyleSheet _Style;
@@ -111,6 +111,6 @@ namespace Foundations::UI::Controls
         void SetTextStyle(const TextStyleSheet& New);
     };
 
-    void CoreMember GetClientRect(Control* Source, LPRECT Dest);
-    void CoreMember GetWindowRect(Control* Source, LPRECT Dest);
+    void CORE_API GetClientRect(Control* Source, LPRECT Dest);
+    void CORE_API GetWindowRect(Control* Source, LPRECT Dest);
 }

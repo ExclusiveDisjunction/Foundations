@@ -3,7 +3,7 @@
 #include "Reference.h"
 #include "Component.h"
 
-namespace Foundations::IO
+namespace Core::IO
 {
 	ForwardAddressIterator::ForwardAddressIterator(AddressRecord* Current)
 	{

@@ -1,6 +1,6 @@
 #include "CalendarGrid.h"
 
-namespace Foundations::UI::Controls
+namespace Core::UI::Controls
 {
 	CalendarGrid::CalendarGrid(int XCoord, int YCoord, int Width, int Height, HWND Parent, HINSTANCE ins, HMENU ID, int Day, String Memo, StyleSheet Style, TextStyleSheet TextStyle)
 	{

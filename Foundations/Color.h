@@ -2,9 +2,9 @@
 
 #include "Types\BasicObject.h"
 
-namespace Foundations
+namespace Core
 {
-	class CoreMember AaColor : public BasicObject
+	class CORE_API AaColor : public BasicObject
 	{
 	private:
 		using Byte = unsigned char;

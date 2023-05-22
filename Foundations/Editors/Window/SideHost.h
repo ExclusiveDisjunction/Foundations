@@ -5,9 +5,9 @@
 #include "..\EditorButtonHost.h"
 #include "..\EditorButton.h"
 
-namespace Foundations::Editors
+namespace Core::Editors
 {
-	class CoreMember SideHost : public EditorButtonHost
+	class CORE_API SideHost : public EditorButtonHost
 	{
 	private:
 		HWND _Base;

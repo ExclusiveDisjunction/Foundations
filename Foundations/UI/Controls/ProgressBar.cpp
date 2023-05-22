@@ -1,6 +1,6 @@
 #include "ProgressBar.h"
 
-namespace Foundations::UI::Controls
+namespace Core::UI::Controls
 {
 	LRESULT __stdcall ProgressBar::_ProgressBarProc(HWND Window, UINT Message, WPARAM wp, LPARAM lp)
 	{

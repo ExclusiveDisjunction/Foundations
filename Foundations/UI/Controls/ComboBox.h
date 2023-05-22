@@ -2,7 +2,7 @@
 
 #include "Control.h"
 
-namespace Foundations::UI::Controls
+namespace Core::UI::Controls
 {
 	class ScrollViewer;
 	class Grid;
@@ -11,7 +11,7 @@ namespace Foundations::UI::Controls
 
 	struct ComboBoxWndInfo;
 
-	class CoreMember ComboBox : public StyledControl
+	class CORE_API ComboBox : public StyledControl
 	{
 	private:
 		StringList _Items;

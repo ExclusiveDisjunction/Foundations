@@ -4,7 +4,7 @@
 
 #define PointEquals(X, Y) (X.x == Y.x && X.y == Y.y)
 
-namespace Foundations::UI::Controls
+namespace Core::UI::Controls
 {
 	TextBox::TextBox(int X, int Y, int Width, int Height, HWND Parent, HINSTANCE ins, String Text, StyleSheet Style, TextStyleSheet TextStyle, bool HasScrolls, bool IsPassword, int MaxCompacity)
 	{

@@ -2,9 +2,9 @@
 
 #include "Control.h"
 
-namespace Foundations::UI::Controls
+namespace Core::UI::Controls
 {
-	class CoreMember CalendarGrid : public StyledControl
+	class CORE_API CalendarGrid : public StyledControl
 	{
 	private:
 		int Date;

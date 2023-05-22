@@ -1,8 +1,12 @@
 #include "TypeRegistry.h"
 
-#include "..\Core.h"
+#include "..\Color.h"
+#include "..\Str.h"
+#include "..\Container.h"
+#include "..\DateTime.h"
+#include "..\Mapping.h"
 
-namespace Foundations
+namespace Core
 {
 	void TypeRegistry::Initiate()
 	{

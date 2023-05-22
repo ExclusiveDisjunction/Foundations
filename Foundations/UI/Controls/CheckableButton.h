@@ -5,7 +5,7 @@
 #define ACBM_UNCHECK WM_USER + 5 //Unchecks the current control. Do not use, use ARBM_SETCHECK (this is internal) WPARAM and LPARAM are 0.
 #define ACBM_CHECK WM_USER + 6 //Checks the current control. Do not use, use ARBM_SETCHECK (this is internal) WPARAM and LPARAM are 0.
 
-namespace Foundations::UI::Controls
+namespace Core::UI::Controls
 {
 	enum CheckableButtonType
 	{
@@ -13,7 +13,7 @@ namespace Foundations::UI::Controls
 		CBT_CheckBox
 	};
 
-	class CoreMember CheckableButton : public StyledControl
+	class CORE_API CheckableButton : public StyledControl
 	{
 	private:
 		static LRESULT __stdcall WndProc(HWND, UINT, WPARAM, LPARAM); //The window procedure for thsi button.

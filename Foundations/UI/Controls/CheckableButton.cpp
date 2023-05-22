@@ -1,6 +1,6 @@
 #include "CheckableButton.h"
 
-namespace Foundations::UI::Controls
+namespace Core::UI::Controls
 {
 	CheckableButton::CheckableButton(int X, int Y, int Width, int Height, HWND Parent, HINSTANCE ins, HMENU ID, bool IsChecked, String Text, CheckableButtonType Type, StyleSheet Style, TextStyleSheet TextStyle)
 	{

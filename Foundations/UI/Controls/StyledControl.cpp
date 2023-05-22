@@ -1,6 +1,6 @@
 #include "Control.h"
 
-namespace Foundations::UI::Controls
+namespace Core::UI::Controls
 {
     void StyledControl::Background(const AaColor& New)
     {

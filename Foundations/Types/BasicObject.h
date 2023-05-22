@@ -2,12 +2,12 @@
 
 #include "..\Common.h"
 
-namespace Foundations
+namespace Core
 {
-	class String;
-	class BasicObject;
+	class CORE_API String;
+	class CORE_API BasicObject;
 
-	class BasicObjectModifyer
+	class CORE_API BasicObjectModifyer
 	{
 	public:
 		virtual BasicObject* Modify(BasicObject* Old) = 0;
@@ -15,7 +15,7 @@ namespace Foundations
 		virtual void View(BasicObject* Obj) = 0;
 	};
 
-	class BasicObject
+	class CORE_API BasicObject
 	{
 	public:
 		virtual String ToString() const = 0;
@@ -33,7 +33,7 @@ namespace Foundations
 
 	//Finish writing simple basic objects.
 
-	class Integer : public BasicObject
+	class CORE_API Integer : public BasicObject
 	{
 	public:
 		Integer();
@@ -78,7 +78,7 @@ namespace Foundations
 		Integer& operator/=(const Integer& B) { this->Value /= B.Value; return *this; }
 	};
 
-	class Double : public BasicObject
+	class CORE_API Double : public BasicObject
 	{
 	public:
 		Double();
@@ -122,8 +122,7 @@ namespace Foundations
 		Double operator/(const Double& B) { return Double(this->Value / B.Value); }
 		Double& operator/=(const Double& B) { this->Value /= B.Value; return *this; }
 	};
-
-	class Boolean : public BasicObject
+	class CORE_API Boolean : public BasicObject
 	{
 	public:
 		Boolean();

@@ -9,7 +9,7 @@
 
 using namespace std;
 
-namespace Foundations
+namespace Core
 {
     String::String()
     {
@@ -730,10 +730,10 @@ namespace Foundations
     }
 }
 
-std::wistream& getline(std::wistream& Istream, Foundations::String& Str)
+CORE_API std::wistream& getline(std::wistream& Istream, Core::String& Str)
 {
     wstring Val;
     getline(Istream, Val);
-    Str = Foundations::String(Val);
+    Str = Core::String(Val);
     return Istream;
 }

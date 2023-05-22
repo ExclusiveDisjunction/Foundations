@@ -2,7 +2,7 @@
 
 #include "..\Common.h"
 
-namespace Foundations::Editors
+namespace Core::Editors
 {
 	static unsigned long long AllEditorsCode;
 }

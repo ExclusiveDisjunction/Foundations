@@ -8,7 +8,7 @@
 using namespace std;
 using namespace std::chrono;
 
-namespace Foundations
+namespace Core
 {
 	DateTime::DateTime() : _Dur(0) { }
 	DateTime::DateTime(int Month, int Day, int Year)

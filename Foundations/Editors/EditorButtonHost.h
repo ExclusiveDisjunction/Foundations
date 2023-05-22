@@ -6,12 +6,12 @@
 #include "..\UI\UICommon.h"
 #include "..\UI\Controls.h"
 
-namespace Foundations::Editors
+namespace Core::Editors
 {
-	class CoreMember Editor;
-	class CoreMember EditorRegistry;
+	class CORE_API Editor;
+	class CORE_API EditorRegistry;
 
-	class CoreMember EditorButtonHost : public EditorHost
+	class CORE_API EditorButtonHost : public EditorHost
 	{
 	protected:
 		UI::Controls::Grid* EditorButtonsBase;

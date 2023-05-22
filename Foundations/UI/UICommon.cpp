@@ -1,6 +1,6 @@
 #include "UICommon.h"
 
-namespace Foundations::UI
+namespace Core::UI
 {
 	//AaColor Background1;
 	//AaColor Background2;

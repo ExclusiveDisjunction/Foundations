@@ -6,7 +6,7 @@
 #include "EditorButton.h"
 #include "..\IO\IOCommon.h"
 
-namespace Foundations::Editors
+namespace Core::Editors
 {    
     using namespace IO;
     using namespace UI;

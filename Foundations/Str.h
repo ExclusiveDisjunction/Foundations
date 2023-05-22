@@ -13,7 +13,7 @@
 *
 */
 
-namespace Foundations
+namespace Core
 {
 	template<typename T>
 	class Vector;
@@ -21,7 +21,7 @@ namespace Foundations
 	using uint = unsigned int;
 
 	using std::wstring;
-	class CoreMember String : public BasicObject
+	class CORE_API String : public BasicObject
 	{
 	private:
 		wchar_t* Text;
@@ -113,17 +113,17 @@ namespace Foundations
 
 		String& operator+=(const wchar_t Two);
 		String& operator+=(const String& Two);
-		friend String CoreMember operator+(const String& One, const wchar_t Two);
-		friend String CoreMember operator+(const String& One, const String& Two);
-		friend String CoreMember operator+(const wchar_t One, const String& Two);
+		friend String operator+(const String& One, const wchar_t Two);
+		friend String operator+(const String& One, const String& Two);
+		friend String operator+(const wchar_t One, const String& Two);
 
-		friend bool CoreMember operator==(const String& One, const String& Two);
-		friend bool CoreMember operator!=(const String& One, const String& Two);
+		friend bool operator==(const String& One, const String& Two);
+		friend bool operator!=(const String& One, const String& Two);
 
-		friend bool CoreMember operator==(const String& One, const wchar_t* Two);
-		friend bool CoreMember operator!=(const String& One, const wchar_t* Two);
-		friend bool CoreMember operator==(const wchar_t* One, const String& Two);
-		friend bool CoreMember operator!=(const wchar_t* One, const String& Two);
+		friend bool operator==(const String& One, const wchar_t* Two);
+		friend bool operator!=(const String& One, const wchar_t* Two);
+		friend bool operator==(const wchar_t* One, const String& Two);
+		friend bool operator!=(const wchar_t* One, const String& Two);
 
 		String& operator=(const String& Obj);
 		String& operator=(const wchar_t* Obj);
@@ -166,14 +166,14 @@ namespace Foundations
 	using StringList = Vector<String>;
 }
 
-std::wistream& getline(std::wistream& Istream, Foundations::String& Str);
+CORE_API std::wistream& getline(std::wistream& Istream, Core::String& Str);
 
 #ifdef _FILESYSTEM_
-inline bool create_directory(const Foundations::Core::String& Path)
+CORE_API inline bool create_directory(const SimPack::Core::String& Path)
 {
 	return std::filesystem::create_directory((std::wstring)Path);
 }
-inline bool exists(const Foundations::Core::String& Path)
+CORE_API inline bool exists(const SimPack::Core::String& Path)
 {
 	return std::filesystem::exists((std::wstring)Path);
 }

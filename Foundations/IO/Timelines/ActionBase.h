@@ -3,11 +3,11 @@
 #include "..\IOCommon.h"
 #include "ActionID.h"
 
-namespace Foundations::IO::Timelines
+namespace Core::IO::Timelines
 {
-	class CoreMember Timeline;
+	class CORE_API Timeline;
 
-	class CoreMember ActionBase
+	class CORE_API ActionBase
 	{
 	private:
 		Timeline* _Owner = nullptr;

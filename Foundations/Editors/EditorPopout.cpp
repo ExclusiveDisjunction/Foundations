@@ -4,7 +4,7 @@
 #include "Editor.h"
 #include "EditorRegistry.h"
 
-namespace Foundations::Editors
+namespace Core::Editors
 {
 	using namespace UI;
 	using namespace UI::Controls;

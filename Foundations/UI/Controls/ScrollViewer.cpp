@@ -1,6 +1,6 @@
 #include "ScrollViewer.h"
 
-namespace Foundations::UI::Controls
+namespace Core::UI::Controls
 {
 	ScrollViewer::ScrollViewer(int X, int Y, int Width, int Height, HWND Parent, HINSTANCE ins, StyleSheet Style)
 	{

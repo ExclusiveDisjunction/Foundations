@@ -9,7 +9,7 @@
 #ifndef Vector_Type_Def
 #define Vector_Type_Def
 
-namespace Foundations
+namespace Core
 {
 	template<typename T>
 	class VectorIterator;

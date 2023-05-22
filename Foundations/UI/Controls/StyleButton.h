@@ -3,9 +3,9 @@
 #include "Button.h"
 #include "Control.h"
 
-namespace Foundations::UI::Controls
+namespace Core::UI::Controls
 {
-	class CoreMember StyleButton : public Button
+	class CORE_API StyleButton : public Button
 	{
 	private:
 		RECT _Border;

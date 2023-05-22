@@ -1,6 +1,6 @@
 #include "Button.h"
 
-namespace Foundations::UI::Controls
+namespace Core::UI::Controls
 {
 	Button::Button(int X, int Y, int Width, int Height, String Text, HWND Parent, HMENU ID, HINSTANCE ins, StyleSheet _Style, TextStyleSheet _Text, TextAlignment Alignment)
 	{

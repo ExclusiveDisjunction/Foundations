@@ -2,9 +2,9 @@
 
 #include "Control.h"
 
-namespace Foundations::UI::Controls
+namespace Core::UI::Controls
 {
-	class CoreMember Grid : public Control
+	class CORE_API Grid : public Control
 	{
 	private:
 		static LRESULT __stdcall WndProc(HWND, UINT, WPARAM, LPARAM);

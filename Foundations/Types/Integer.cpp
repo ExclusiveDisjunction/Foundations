@@ -2,7 +2,7 @@
 
 #include "..\Str.h"
 
-namespace Foundations
+namespace Core
 {
 	Integer::Integer() : Value(0) {}
 	Integer::Integer(long long Value) : Value(Value) {}

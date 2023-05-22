@@ -2,9 +2,9 @@
 
 #include "Control.h"
 
-namespace Foundations::UI::Controls
+namespace Core::UI::Controls
 {
-	class CoreMember Label : public Control
+	class CORE_API Label : public Control
 	{
 	private:
 		String Text;

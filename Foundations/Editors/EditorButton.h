@@ -4,12 +4,12 @@
 #include "..\UI\Controls\Control.h"
 #include "..\Container.h"
 
-namespace Foundations::Editors
+namespace Core::Editors
 {
-	class CoreMember Editor;
-	class CoreMember EditorHost;
+	class CORE_API Editor;
+	class CORE_API EditorHost;
 
-	class CoreMember EditorButton : public UI::Controls::Control
+	class CORE_API EditorButton : public UI::Controls::Control
 	{
 	private:
 		Editor* Source;

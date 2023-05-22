@@ -1,6 +1,6 @@
 #include "Grid.h"
 
-namespace Foundations::UI::Controls
+namespace Core::UI::Controls
 { 
     Grid::Grid(int X, int Y, int Width, int Height, HWND Parent, HINSTANCE ins, StyleSheet Style)
     {

@@ -7,13 +7,13 @@
 #include "..\UI\UICommon.h"
 #include "..\UI\Windows\FooterHost.h"
 
-namespace Foundations::Editors
+namespace Core::Editors
 {
-	class CoreMember Editor;
-	class CoreMember EditorButtonHost;
-	class CoreMember EditorPopout;
+	class CORE_API Editor;
+	class CORE_API EditorButtonHost;
+	class CORE_API EditorPopout;
 
-	class CoreMember EditorRegistry
+	class CORE_API EditorRegistry
 	{
 	private:
 		EditorRegistry() {}

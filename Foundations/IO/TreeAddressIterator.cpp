@@ -3,7 +3,7 @@
 #include "Component.h"
 #include "Reference.h"
 
-namespace Foundations::IO
+namespace Core::IO
 {
 	TreeAddressIterator::TreeAddressIterator(AddressRecord* Current)
 	{

@@ -17,11 +17,11 @@
 #define APBM_SETPROGRESS 0x0401 //Tells the ProgressBar window to re-size its progress. It will repaint after. WPARAM = Target Value, LPARAM = Not Used.
 #define APBM_GETPROGRESS 0x0402 //Retrive's the ProgressBar's current progress. WPARAM & LPARAM are not used.
 
-namespace Foundations::UI::Controls
+namespace Core::UI::Controls
 {
 	constexpr const wchar_t ProgressBarClass[] = L"AaronProgressBar";
 
-	class CoreMember ProgressBar : public Control
+	class CORE_API ProgressBar : public Control
 	{
 	private:
 		static LRESULT __stdcall _ProgressBarProc(HWND, UINT, WPARAM, LPARAM);

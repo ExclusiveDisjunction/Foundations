@@ -2,9 +2,9 @@
 
 #include "Control.h"
 
-namespace Foundations::UI::Controls
+namespace Core::UI::Controls
 {
-	class CoreMember ScrollViewer : public Control
+	class CORE_API ScrollViewer : public Control
 	{
 	private:
 		StyleSheet _Style;

@@ -1,7 +1,7 @@
 #pragma once
 
 #ifdef CORE_EXPORTS
-#define CoreMember _declspec(dllexport)
+#define CORE_API _declspec(dllexport)
 #else
-#define CoreMember _declspec(dllimport)
+#define CORE_API _declspec(dllimport)
 #endif

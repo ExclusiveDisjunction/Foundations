@@ -3,7 +3,7 @@
 #include <gdiplus.h>
 using namespace Gdiplus;
 
-namespace Foundations::UI::Controls
+namespace Core::UI::Controls
 {
 	ImageViewer::ImageViewer(int XCoord, int YCoord, int Width, int Height, HWND Parent, HINSTANCE ins, HGLOBAL Target)
 	{

@@ -4,9 +4,9 @@
 
 #include <fstream>
 
-namespace Foundations::IO
+namespace Core::IO
 {
-	class CoreMember FileInstance
+	class CORE_API FileInstance
 	{
 	private:
 		std::fstream* File = nullptr;

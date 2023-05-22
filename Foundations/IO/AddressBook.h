@@ -4,11 +4,11 @@
 #include "AddressRecord.h"
 #include "ReductionLevel.h"
 
-namespace Foundations::IO
+namespace Core::IO
 {
-	class CoreMember FileInstance;
+	class CORE_API FileInstance;
 
-	class CoreMember ForwardAddressIterator
+	class CORE_API ForwardAddressIterator
 	{
 	private:
 		AddressRecord* _Current;
@@ -41,7 +41,7 @@ namespace Foundations::IO
 		friend bool operator==(const ForwardAddressIterator& a, ForwardAddressIterator& b) { return a._Current == b._Current; }
 		friend bool operator!=(const ForwardAddressIterator& a, ForwardAddressIterator& b) { return a._Current != b._Current; }
 	};
-	class CoreMember TreeAddressIterator
+	class CORE_API TreeAddressIterator
 	{
 	private:
 		AddressRecord* _Current;
@@ -83,7 +83,7 @@ namespace Foundations::IO
 		bool Decend();
 	};
 
-	class CoreMember AddressBook
+	class CORE_API AddressBook
 	{
 	private:
 	public:

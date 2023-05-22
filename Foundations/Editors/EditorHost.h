@@ -5,17 +5,17 @@
 #include "..\Common.h"
 #include "..\UI\UICommon.h"
 
-namespace Foundations::Editors
+namespace Core::Editors
 {
-	class CoreMember EditorButton;
+	class CORE_API EditorButton;
 
-	class CoreMember Editor;
-	class CoreMember EditorRegistry;
+	class CORE_API Editor;
+	class CORE_API EditorRegistry;
 
 	/**
 	* When a class wants to be able to host editors, they must inherit this class.
 	*/
-	class CoreMember EditorHost
+	class CORE_API EditorHost
 	{
 	protected:
 		Editor* Current;

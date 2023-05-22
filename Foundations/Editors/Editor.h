@@ -8,7 +8,7 @@
 #include "..\Str.h"
 #include "..\UI\Controls.h"
 
-namespace Foundations
+namespace Core
 {
 	namespace IO
 	{
@@ -26,7 +26,7 @@ namespace Foundations
 		/// <summary>
 		/// The base class for all editors. If an editor is to be written, it must inherit this class.
 		/// </summary>
-		class CoreMember Editor
+		class CORE_API Editor
 		{
 		private:
 			void GenerateBase(HWND Parent, RECT Margin);

@@ -9,7 +9,7 @@
 #include <gdiplus.h>
 #pragma comment (lib, "gdiplus.lib")
 
-namespace Foundations::UI
+namespace Core::UI
 {
 	static AaColor Background1;
 	static AaColor Background2;

@@ -2,12 +2,12 @@
 
 #include "BasicObject.h"
 
-namespace Foundations
+namespace Core
 {
 	template<typename TKey, typename TValue>
-	class CoreMember Mapping;
+	class Mapping;
 
-	class CoreMember TypeRegistry
+	class CORE_API TypeRegistry
 	{
 	public:
 		enum ErrorType
