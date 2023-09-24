@@ -1,22 +1,13 @@
 #pragma once
 
-#include <iostream>
 #include <chrono>
 
 #include "Types\BasicObject.h"
-#include "Str.h"
-
-//namespace std
-//{
-//	namespace chrono
-//	{
-//		template <class _Rep, class _Period>
-//		class duration;
-//	}
-//}
 
 namespace Core
 {
+	class CORE_API String;
+
 	enum class DateStringFormat
 	{
 		LongDate = 0,
@@ -61,33 +52,17 @@ namespace Core
 		DateTime DayParts() const;
 		DateTime TimeParts() const;
 		
-		String ToString() const override { return ToBackString() + L" _AS_DATETIME"; }
-		String ToUIString() const override { return ToString(DateStringFormat::LongDate); }
-		String TypeName() const override { return L"DATETIME"; }
+		String ToString() const override;
+		String ToUIString() const override;
+		String TypeName() const override;
 
-		BasicObject* DefaultValue() const override { return new DateTime(); }
-		BasicObject* Clone() const override { return new DateTime(*this); }
-		bool OverrideFrom(BasicObject* Obj) override
-		{
-			DateTime* New = dynamic_cast<DateTime*>(Obj);
-			if (!New)
-				return false;
+		BasicObject* DefaultValue() const override;
+		BasicObject* Clone() const override;
+		bool OverrideFrom(BasicObject* Obj) override;
+		void FillFromString(const String& Obj) override;
 
-			*this = *New;
-			return true;
-		}
-
-		void FillFromString(const String& Obj) override
-		{
-			*this = DateTime::FromBackString(Obj);
-		}
-
-		bool HasModifyer() const override { return true; }
-		BasicObjectModifyer* ConstructModifyer() const override
-		{
-			//TODO: Write DateTime modifyer.
-			return nullptr;
-		}
+		bool HasModifyer() const override;
+		BasicObjectModifyer* ConstructModifyer() const override;
 
 		/**
 		* Converts this DateTime to the following format: MM/DD/YYYY HH:MM:SS [AM/PM]
@@ -96,17 +71,12 @@ namespace Core
 		String ToBackString() const;
 		static DateTime FromBackString(const String& Value);
 
-		friend std::wostream& operator<<(std::wostream& out, const DateTime& Obj)
-		{
-			out << Obj.ToBackString();
-			return out;
-		}
+		friend CORE_API std::wostream& operator<<(std::wostream& out, const DateTime& Obj);
 
 		friend bool operator==(const DateTime& One, const DateTime& Two);
 		friend bool operator!=(const DateTime& One, const DateTime& Two);
 		bool operator<(const DateTime& Two) const;
 		bool operator>(const DateTime& Two) const;
-		std::partial_ordering operator<=>(const DateTime& Two) const;
 
 		friend DateTime operator-(const DateTime& One, const DateTime& Two);
 		friend DateTime operator+(const DateTime& One, const DateTime& Two);

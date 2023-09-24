@@ -7,60 +7,92 @@
 
 namespace Core
 {
-	AaColor::AaColor() : _Value(0)
+	Color::Color() : _Value(0)
 	{
 
 	}
-	AaColor::AaColor(const Byte R, const Byte G, const Byte B)
+	Color::Color(const Byte R, const Byte G, const Byte B)
 	{
 		Assign(0xFF, R, G, B);
 	}
-	AaColor::AaColor(const Byte A, const Byte R, const Byte G, const Byte B)
+	Color::Color(const Byte A, const Byte R, const Byte G, const Byte B)
 	{
 		Assign(A, R, G, B);
 	}
-	AaColor::AaColor(const AaColor& Other)
+	Color::Color(const Color& Other)
 	{
 		Assign(Other.A(), Other.R(), Other.G(), Other.B());
 	}
-	AaColor::AaColor(const unsigned int& Other)
+	Color::Color(Color&& Other) noexcept
+	{
+		Assign(Other.A(), Other.R(), Other.G(), Other.B());
+		Other._Value = 0;
+	}
+	Color::Color(unsigned int Other)
 	{
 		_Value = Other;
 	}
 
-	AaColor::Byte AaColor::A() const
+	void Color::Assign(Byte A, Byte R, Byte G, Byte B)
+	{
+		_Value = static_cast<unsigned int>((A << 24) | (R << 16) | (G << 8) | B);
+	}
+	void Color::Assign(unsigned int New)
+	{
+		_Value = New;
+	}
+
+	void Color::Reduce(float By)
+	{
+		Assign(A(), static_cast<Byte>(R() * By), static_cast<Byte>(G() * By), static_cast<Byte>(B() * By));
+	}
+
+	Color& Color::operator=(const Color& Other)
+	{
+		Assign(Other.A(), Other.R(), Other.G(), Other.B());
+		return *this;
+	}
+	Color& Color::operator=(Color&& Other) noexcept
+	{
+		Assign(Other.A(), Other.R(), Other.G(), Other.B());
+		Other._Value = 0;
+
+		return *this;
+	}
+
+	Color::Byte Color::A() const
 	{
 		return static_cast<Byte>((_Value >> 24) & 0xFF);
 	}
-	AaColor::Byte AaColor::R() const
+	Color::Byte Color::R() const
 	{
 		return static_cast<Byte>((_Value >> 16) & 0xFF);
 	}
-	AaColor::Byte AaColor::G() const
+	Color::Byte Color::G() const
 	{
 		return static_cast<Byte>((_Value >> 8) & 0xFF);
 	}
-	AaColor::Byte AaColor::B() const
+	Color::Byte Color::B() const
 	{
 		return static_cast<Byte>(_Value & 0xFF);
 	}
 
-	String AaColor::ToString() const
+	String Color::ToString() const
 	{
 		return String(_Value) + L" _AS_COLOR";
 	}
-	String AaColor::ToUIString() const
+	String Color::ToUIString() const
 	{
 		return L"#"; //TODO: Write algor that converts to hex.
 	}
-	String AaColor::TypeName() const
+	String Color::TypeName() const
 	{
 		return L"COLOR";
 	}
 
-	bool AaColor::OverrideFrom(BasicObject* Obj)
+	bool Color::OverrideFrom(BasicObject* Obj)
 	{
-		AaColor* FirstConv = dynamic_cast<AaColor*>(Obj);
+		Color* FirstConv = dynamic_cast<Color*>(Obj);
 		if (FirstConv)
 		{
 			*this = *FirstConv;
@@ -76,40 +108,23 @@ namespace Core
 
 		return false;
 	}
-
-	void AaColor::FillFromString(const String& Obj)
+	void Color::FillFromString(const String& Obj)
 	{
-		*this = AaColor(Obj.ToUInt());
+		*this = Color(Obj.ToUInt());
 	}
 
-	bool AaColor::HasModifyer() const { return true; }
-	BasicObjectModifyer* AaColor::ConstructModifyer() const
+	bool Color::HasModifyer() const { return true; }
+	BasicObjectModifyer* Color::ConstructModifyer() const
 	{
-		//TODO: Write AaColor Basic Modifyer
+		//TODO: Write Color Basic Modifyer
 		return nullptr;
 	}
 
-	void AaColor::Assign(Byte A, Byte R, Byte G, Byte B)
-	{
-		_Value = static_cast<unsigned int>((A << 24) | (R << 16) | (G << 8) | B);
-	}
-	void AaColor::Assign(unsigned int New)
-	{
-		_Value = New;
-	}
-
-	void AaColor::Reduce(float By)
-	{
-		Assign(A(), static_cast<Byte>(R() * By), static_cast<Byte>(G() * By), static_cast<Byte>(B() * By));
-	}
-
-
-	COLORREF ColorToColorRef(const AaColor& Color)
+	COLORREF ColorToColorRef(const Color& Color)
 	{
 		return RGB(Color.R(), Color.G(), Color.B());
-	}
-	
-	Gdiplus::Color ColorToGDIPColor(const AaColor& Color)
+	}	
+	Gdiplus::Color ColorToGDIPColor(const Color& Color)
 	{
 		return Gdiplus::Color(Color.A(), Color.R(), Color.G(), Color.B());
 	}

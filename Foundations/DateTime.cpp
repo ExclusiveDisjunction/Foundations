@@ -1,9 +1,5 @@
 #include "DateTime.h"
-
-#include "Container.h"
 #include "Str.h"
-
-#include <chrono>
 
 using namespace std;
 using namespace std::chrono;
@@ -223,6 +219,10 @@ namespace Core
 		return New; //All that is left is simply H:M:S:MS. No further action must take place.
 	}
 
+	String DateTime::ToString() const
+	{ 
+		return ToBackString() + L" _AS_DATETIME"; 
+	}
 	String DateTime::ToString(DateStringFormat Format) const
 	{
 		int Year = this->Year(), Month = this->Month(), Day = this->Day(), Hour = this->Hour(), Minute = this->Minute(), Second = this->Second(), Millisecond = this->Millisecond();
@@ -353,6 +353,46 @@ namespace Core
 
 		return Return;
 	}
+	String DateTime::ToUIString() const
+	{ 
+		return ToString(DateStringFormat::LongDate); 
+	}
+	String DateTime::TypeName() const
+	{ 
+		return L"DATETIME"; 
+	}
+
+	BasicObject* DateTime::DefaultValue() const 
+	{ 
+		return new DateTime(); 
+	}
+	BasicObject* DateTime::Clone() const
+	{ 
+		return new DateTime(*this);
+	}
+	bool DateTime::OverrideFrom(BasicObject* Obj)
+	{
+		DateTime* New = dynamic_cast<DateTime*>(Obj);
+		if (!New)
+			return false;
+
+		*this = *New;
+		return true;
+	}
+	void DateTime::FillFromString(const String& Obj)
+	{
+		*this = DateTime::FromBackString(Obj);
+	}
+
+	bool DateTime::HasModifyer() const 
+	{ 
+		return true;
+	}
+	BasicObjectModifyer* DateTime::ConstructModifyer() const
+	{
+		//TODO: Write DateTime modifyer.
+		return nullptr;
+	}
 
 	String DateTime::ToBackString() const
 	{
@@ -382,10 +422,6 @@ namespace Core
 	{
 		return _Dur > Two._Dur;
 	}
-	std::partial_ordering DateTime::operator<=>(const DateTime& Two) const
-	{
-		return _Dur <=> Two._Dur;
-	}
 
 	DateTime operator-(const DateTime& One, const DateTime& Two)
 	{
@@ -404,5 +440,11 @@ namespace Core
 	{
 		_Dur -= Two._Dur;
 		return *this;
+	}
+
+	std::wostream& operator<<(std::wostream& out, const DateTime& Obj)
+	{
+		out << Obj.ToBackString();
+		return out;
 	}
 }

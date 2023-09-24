@@ -2,9 +2,9 @@
 
 #include "..\Color.h"
 #include "..\Str.h"
-#include "..\Container.h"
+#include "..\VectorB.h"
 #include "..\DateTime.h"
-#include "..\Mapping.h"
+#include "..\MappingB.h"
 
 namespace Core
 {
@@ -13,7 +13,7 @@ namespace Core
 		AppendType(new Integer());
 		AppendType(new Double());
 		AppendType(new Boolean());
-		AppendType(new AaColor());
+		AppendType(new Color());
 		AppendType(new VectorB());
 		AppendType(new DateTime());
 		AppendType(new MappingB());

@@ -5,32 +5,21 @@
 #include "Common.h"
 #include "Types\BasicObject.h"
 
-/*
-*
-* Str.h
-*
-* Defines the class String, which is used to define and modify text. This is my own version, not ANSI.
-*
-*/
-
 namespace Core
 {
 	template<typename T>
 	class Vector;
 
-	using uint = unsigned int;
-
-	using std::wstring;
 	class CORE_API String : public BasicObject
 	{
 	private:
 		wchar_t* Text;
-		uint _Len = 0, _Compacity = 3;
+		unsigned int _Len = 0, _Compacity = 3;
 
 		String FilterToNum(bool NegitiveNumbers, bool Decimals) const;
 		void AssignByChars(const wchar_t* Chars);
 		void AssignByChars(const wchar_t Char);
-		void AssignByChars(const char* Chars);
+		//void AssignByChars(const char* Chars);
 		void AssignByChars(const char Char);
 	public:
 		String();
@@ -56,35 +45,35 @@ namespace Core
 		bool Add(const wchar_t& Item);
 		bool Add(const char& Item);
 		bool Remove(const wchar_t& Item);
-		bool RemoveAt(uint Index);
+		bool RemoveAt(unsigned int Index);
 		bool RemoveAllOf(const wchar_t& Item);
-		bool RemoveRange(uint Begin, uint End);
+		bool RemoveRange(unsigned int Begin, unsigned int End);
 		void Clear();
 
-		String SubString(uint Begin) const
+		String SubString(unsigned int Begin) const
 		{
 			return SubString(Begin, _Len - 1);
 		}
-		String SubString(uint Begin, uint End) const;
+		String SubString(unsigned int Begin, unsigned int End) const;
 		const wchar_t* ConstWchar() const;
 
-		uint Length() const;
-		uint IndexOf(const wchar_t& Item) const;
+		unsigned int Length() const;
+		unsigned int IndexOf(const wchar_t& Item) const;
 		bool Contains(const wchar_t& Item) const;
 		bool Contains(String Other) const;
-		uint CountOf(const wchar_t& Item) const;
+		unsigned int CountOf(const wchar_t& Item) const;
 
 		wchar_t operator[](int Index) const
 		{
 			return operator[]((unsigned int)Index);
 		}
-		wchar_t operator[](uint Index) const;
+		wchar_t operator[](unsigned int Index) const;
 
 		String ToLower() const;
 		String ToUpper() const;
 
 		int ToInt() const;
-		uint ToUInt() const;
+		unsigned int ToUInt() const;
 		long long ToLong() const;
 		unsigned long long ToULong() const;
 		double ToDouble() const;
@@ -108,22 +97,22 @@ namespace Core
 		String RemoveFromEnd(wchar_t Item) const;
 		int TabIndex() const;
 
-		static uint GetStrLen(const wchar_t*& Chars);
-		static uint GetStrLen(const char*& Chars);
+		static unsigned int GetStrLen(const wchar_t*& Chars);
+		static unsigned int GetStrLen(const char*& Chars);
 
 		String& operator+=(const wchar_t Two);
 		String& operator+=(const String& Two);
-		friend String operator+(const String& One, const wchar_t Two);
-		friend String operator+(const String& One, const String& Two);
-		friend String operator+(const wchar_t One, const String& Two);
+		friend CORE_API String operator+(const String& One, const wchar_t Two);
+		friend CORE_API String operator+(const String& One, const String& Two);
+		friend CORE_API String operator+(const wchar_t One, const String& Two);
 
-		friend bool operator==(const String& One, const String& Two);
-		friend bool operator!=(const String& One, const String& Two);
+		friend CORE_API bool operator==(const String& One, const String& Two);
+		friend CORE_API bool operator!=(const String& One, const String& Two);
 
-		friend bool operator==(const String& One, const wchar_t* Two);
-		friend bool operator!=(const String& One, const wchar_t* Two);
-		friend bool operator==(const wchar_t* One, const String& Two);
-		friend bool operator!=(const wchar_t* One, const String& Two);
+		friend CORE_API bool operator==(const String& One, const wchar_t* Two);
+		friend CORE_API bool operator!=(const String& One, const wchar_t* Two);
+		friend CORE_API bool operator==(const wchar_t* One, const String& Two);
+		friend CORE_API bool operator!=(const wchar_t* One, const String& Two);
 
 		String& operator=(const String& Obj);
 		String& operator=(const wchar_t* Obj);
@@ -159,8 +148,8 @@ namespace Core
 			return nullptr;
 		}
 
-		friend std::wostream& operator<<(std::wostream& stream, const String& String);
-		friend std::ostream& operator>>(std::basic_ostream<char>& stream, String& String);
+		friend CORE_API std::wostream& operator<<(std::wostream& stream, const String& String);
+		friend CORE_API std::wistream& operator>>(std::wistream& stream, String& Str);
 	};
 
 	using StringList = Vector<String>;
@@ -169,11 +158,11 @@ namespace Core
 CORE_API std::wistream& getline(std::wistream& Istream, Core::String& Str);
 
 #ifdef _FILESYSTEM_
-CORE_API inline bool create_directory(const SimPack::Core::String& Path)
+CORE_API inline bool create_directory(const Core::String& Path)
 {
 	return std::filesystem::create_directory((std::wstring)Path);
 }
-CORE_API inline bool exists(const SimPack::Core::String& Path)
+CORE_API inline bool exists(const Core::String& Path)
 {
 	return std::filesystem::exists((std::wstring)Path);
 }
