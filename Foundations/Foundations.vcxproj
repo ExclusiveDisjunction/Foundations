@@ -262,7 +262,6 @@
     <ClInclude Include="Types\BasicObject.h" />
     <ClInclude Include="CharDelem.h" />
     <ClInclude Include="Color.h" />
-    <ClInclude Include="Container.h" />
     <ClInclude Include="Core.h" />
     <ClInclude Include="DateTime.h" />
     <ClInclude Include="Mapping.h" />
