@@ -3,7 +3,7 @@
 #include <initializer_list>
 
 #include "Vector.h"
-#include "VectorIterator.h"
+#include "Iterator.h"
 #include "Types\BasicObject.h"
 #include "Types\TypeRegistry.h"
 

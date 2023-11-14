@@ -116,7 +116,7 @@ namespace Core
 			return;
 		StringList List = Splined.Split(L',');
 
-		VectorIterator<String> Iterator = List.begin(), End = List.end();
+		auto Iterator = List.begin(), End = List.end();
 		i = 0;
 		MappingPair<BasicObject*, BasicObject*> Temp;
 		for (i = 0; Iterator != End; i++, Iterator++)

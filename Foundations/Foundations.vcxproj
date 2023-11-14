@@ -269,9 +269,10 @@
     <ClInclude Include="Types\TypeRegistry.h" />
     <ClInclude Include="Vector.h" />
     <ClInclude Include="VectorB.h" />
-    <ClInclude Include="VectorIterator.h" />
+    <ClInclude Include="Iterator.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Iterator.tpp" />
     <ClCompile Include="MappingB.cpp" />
     <ClCompile Include="Types\Boolean.cpp" />
     <ClCompile Include="Color.cpp" />
@@ -281,6 +282,7 @@
     <ClCompile Include="Types\Integer.cpp" />
     <ClCompile Include="Str.cpp" />
     <ClCompile Include="Types\TypeRegistry.cpp" />
+    <ClCompile Include="Vector.tpp" />
     <ClCompile Include="VectorB.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

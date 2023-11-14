@@ -57,7 +57,7 @@
     <ClInclude Include="VectorB.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="VectorIterator.h">
+    <ClInclude Include="Iterator.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -90,6 +90,12 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="VectorB.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Vector.tpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Iterator.tpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
