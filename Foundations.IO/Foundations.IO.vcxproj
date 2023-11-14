@@ -163,24 +163,16 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="dllmain.cpp" />
-    <ClCompile Include="FileInstance.cpp" />
-    <ClCompile Include="ForwardAddressIterator.cpp" />
     <ClCompile Include="IOCommon.cpp" />
     <ClCompile Include="Reference.cpp" />
-    <ClCompile Include="TreeAddressIterator.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Address.h" />
-    <ClInclude Include="AddressBook.h" />
-    <ClInclude Include="AddressRecord.h" />
-    <ClInclude Include="Component.h" />
-    <ClInclude Include="FileInstance.h" />
+    <ClInclude Include="Element.h" />
     <ClInclude Include="IOCommon.h" />
     <ClInclude Include="PHS\PHS.h" />
     <ClInclude Include="PHS\PHSReader.h" />
     <ClInclude Include="PHS\PHSWriter.h" />
-    <ClInclude Include="ReductionLevel.h" />
     <ClInclude Include="Reference.h" />
     <ClInclude Include="Timelines\ActionBase.h" />
     <ClInclude Include="Timelines\ActionID.h" />

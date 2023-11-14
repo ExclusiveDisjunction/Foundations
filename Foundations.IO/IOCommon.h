@@ -9,3 +9,10 @@
 #elif
 #define FND_IO_API __declspec(dllimport)
 #endif
+
+namespace IO
+{
+	class FileInstance;
+	class Element;
+	class Reference;
+}
