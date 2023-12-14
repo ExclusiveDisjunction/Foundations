@@ -252,6 +252,9 @@
     <ClCompile Include="Editors\EditorPopout.cpp" />
     <ClCompile Include="Editors\EditorRegistry.cpp" />
     <ClCompile Include="Editors\Window\SideHost.cpp" />
+    <ClCompile Include="Style\StyleSchematic.cpp" />
+    <ClCompile Include="Style\StyleSchematicElement.cpp" />
+    <ClCompile Include="Style\StyleType.cpp" />
     <ClCompile Include="UICommon.cpp" />
     <ClCompile Include="Windows\FooterHost.cpp" />
   </ItemGroup>
@@ -279,6 +282,10 @@
     <ClInclude Include="Editors\EditorRegistry.h" />
     <ClInclude Include="Editors\Window\SideHost.h" />
     <ClInclude Include="Editors\Window\Window.h" />
+    <ClInclude Include="Style\Style.h" />
+    <ClInclude Include="Style\StyleSheet.h" />
+    <ClInclude Include="Style\StyleType.h" />
+    <ClInclude Include="Style\StyleSchematic.h" />
     <ClInclude Include="UICommon.h" />
     <ClInclude Include="Windows\FooterHost.h" />
   </ItemGroup>

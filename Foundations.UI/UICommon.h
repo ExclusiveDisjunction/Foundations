@@ -9,6 +9,12 @@
 #include <gdiplus.h>
 #pragma comment (lib, "gdiplus.lib")
 
+#ifdef FOUNDATIONSUI_EXPORTS
+#define UI_API _declspec(dllexport)
+#else
+#define UI_API _declspec(dllimport)
+#endif
+
 namespace Core::UI
 {
 	static Color Background1;
