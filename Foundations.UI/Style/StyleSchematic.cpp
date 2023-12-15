@@ -61,7 +61,7 @@ StyleSchematic& StyleSchematic::operator=(const StyleSchematic& Obj)
 	for (StyleSchematicElement* ToClone : Obj.Properties)
 		Properties.push_back(new StyleSchematicElement(*ToClone));
 }
-StyleSchematicElement& StyleSchematic::operator[](const String& Name)
+StyleSchematicElement& StyleSchematic::operator[](const std::string& Name) const
 {
 	for (StyleSchematicElement* Elem : Properties)
 	{
@@ -112,7 +112,7 @@ void StyleSchematic::AppendManyProperties(const std::vector<StyleSchematicElemen
 			Properties.push_back(InProp);
 	}	
 }
-bool StyleSchematic::RemoveProperty(String Name)
+bool StyleSchematic::RemoveProperty(std::string Name)
 {
 	std::vector<StyleSchematicElement*>::iterator begin, end = Properties.end();
 	for (begin = Properties.begin(); begin != end; begin++)

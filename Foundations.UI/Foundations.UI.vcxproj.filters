@@ -96,6 +96,12 @@
     <ClCompile Include="Style\StyleSchematic.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Style\StyleSheet.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Style\Style.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Controls\Button.h">

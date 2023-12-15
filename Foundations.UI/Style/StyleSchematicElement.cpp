@@ -3,7 +3,7 @@
 using namespace Core;
 using namespace Core::UI;
 
-StyleSchematicElement::StyleSchematicElement(const String& Name, StyleType* TypeSignature, StyleType* DefaultValue = nullptr)
+StyleSchematicElement::StyleSchematicElement(const std::string& Name, StyleType* TypeSignature, StyleType* DefaultValue = nullptr)
 {
 	this->PropertyName = Name;
 
@@ -48,15 +48,15 @@ StyleSchematicElement& StyleSchematicElement::operator=(const StyleSchematicElem
 	this->DefaultValue = Obj.Type->Clone();
 }
 
-String StyleSchematicElement::GetName() const
+std::string StyleSchematicElement::GetName() const
 {
 	return PropertyName;
 }
-String StyleSchematicElement::TypeName() const
+std::string StyleSchematicElement::TypeName() const
 {
 	return !Type ? L"NULL" : Type->TypeName(); 
 }
-String StyleSchematicElement::DefaultValueStr() const
+std::string StyleSchematicElement::DefaultValueStr() const
 { 
 	return !DefaultValue ? L"NULL" : DefaultValue->ToString(); 
 }
