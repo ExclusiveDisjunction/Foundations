@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Control.h"
+#include "ControlBase.h"
 
 #define APBS_COLORGREEN 1 //Draws with a green bar color
 #define APBS_COLORRED 2 //Draws with a red bar color
@@ -17,57 +17,52 @@
 #define APBM_SETPROGRESS 0x0401 //Tells the ProgressBar window to re-size its progress. It will repaint after. WPARAM = Target Value, LPARAM = Not Used.
 #define APBM_GETPROGRESS 0x0402 //Retrive's the ProgressBar's current progress. WPARAM & LPARAM are not used.
 
-namespace Core::UI::Controls
+constexpr const wchar_t ProgressBarClass[] = L"AaronProgressBar";
+
+class ProgressBar : public ControlBase
 {
-	constexpr const wchar_t ProgressBarClass[] = L"AaronProgressBar";
-
-	class CORE_API ProgressBar : public Control
+private:
+	static LRESULT __stdcall _ProgressBarProc(HWND, UINT, WPARAM, LPARAM);
+public:
+	ProgressBar() : ControlBase()
 	{
-	private:
-		static LRESULT __stdcall _ProgressBarProc(HWND, UINT, WPARAM, LPARAM);
-	public:
-		ProgressBar() : Control()
-		{
-		}
+	}
 
-		//Creates a single ProgressBar with the default style. Set style to different value to change appearance.
-		static ProgressBar Create(HWND Parent, int X, int Y, int Width, int Height, HINSTANCE Ins, DWORD Style = APBS_STANDARD);
-		//Call at app entry. Used to setup the first WndClass for all later controls
-		static void InitateBase(HINSTANCE Instance);
+	//Creates a single ProgressBar with the default style. Set style to different value to change appearance.
+	static ProgressBar Create(HWND Parent, int X, int Y, int Width, int Height, HINSTANCE Ins, DWORD Style = APBS_STANDARD);
+	//Call at app entry. Used to setup the first WndClass for all later controls
+	static void InitateBase(HINSTANCE Instance);
 
-		//Returns the progress of the Bar.
-		int Progress()
-		{
-			return (int)GetWindowLongPtrW(_Base, GWLP_USERDATA);
-		}
-		//Sets and 
-		void Progress(int New)
-		{
-			SendMessageW(_Base, APBM_SETPROGRESS, (WPARAM)New, 0);
-		}
+	//Returns the progress of the Bar.
+	int Progress()
+	{
+		return (int)GetWindowLongPtrW(_Base, GWLP_USERDATA);
+	}
+	//Sets and 
+	void Progress(int New)
+	{
+		SendMessageW(_Base, APBM_SETPROGRESS, (WPARAM)New, 0);
+	}
 
-		RECT LocSize()
-		{
-			RECT Return;
-			GetWindowRect(_Base, &Return);
-			return Return;
-		}
-		void LocSize(RECT New)
-		{
-			MoveWindow(_Base, New.top, New.left, New.right, New.bottom, TRUE);
-		}
+	RECT LocSize()
+	{
+		RECT Return;
+		GetWindowRect(_Base, &Return);
+		return Return;
+	}
+	void LocSize(RECT New)
+	{
+		MoveWindow(_Base, New.top, New.left, New.right, New.bottom, TRUE);
+	}
 
-		DWORD Style()
-		{
-			DWORD Val = GetWindowLongW(_Base, GWL_STYLE);
-			Val &= ~WS_VISIBLE;
-			Val &= ~WS_CHILD;
-
-			return Val;
-		}
-		void Style(DWORD New)
-		{
-			SetWindowLongW(_Base, GWL_STYLE, WS_CHILD | WS_VISIBLE | New);
-		}
-	};
-}
+	DWORD Style()
+	{
+		DWORD Val = GetWindowLongW(_Base, GWL_STYLE);
+		Val &= ~WS_VISIBLE;
+		Val &= ~WS_CHILD;
+	}
+	void Style(DWORD New)
+	{
+		SetWindowLongW(_Base, GWL_STYLE, WS_CHILD | WS_VISIBLE | New);
+	}
+};

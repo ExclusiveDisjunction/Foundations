@@ -3,6 +3,10 @@
 using namespace Core;
 using namespace Core::UI;
 
+StyleSchematic::StyleSchematic()
+{
+
+}
 StyleSchematic::StyleSchematic(const std::vector<StyleSchematicElement*>& Schemas)
 {
 	this->Properties = Schemas;

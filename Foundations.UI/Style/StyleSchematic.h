@@ -34,6 +34,7 @@ namespace Core::UI
 	private:
 		std::vector<StyleSchematicElement*> Properties;
 	public:
+		StyleSchematic();
 		StyleSchematic(const std::vector<StyleSchematicElement*>& Schemas);
 		StyleSchematic(const StyleSchematic& Obj) noexcept;
 		~StyleSchematic();

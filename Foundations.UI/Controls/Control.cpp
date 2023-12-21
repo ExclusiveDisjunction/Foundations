@@ -18,18 +18,15 @@ namespace Core::UI::Controls
         wchar_t* Chars = const_cast<wchar_t*>(static_cast<const wchar_t*>(New));
         SendMessageW(Window, WM_SETTEXT, 0, reinterpret_cast<LPARAM>(Chars));
     }
-    void GetClientRect(Control* Source, LPRECT Dest)
-    {
-        GetClientRect(*Source, Dest);
-    }
-    void GetWindowRect(Control* Source, LPRECT Dest)
-    {
-        GetWindowRect(*Source, Dest);
-    }
 
-    Control::Control()
+    Control::Control(HINSTANCE ins)
     {
         _Base = nullptr;
+        if (!Control::_ThisAtom)
+            RegisterAtom(ins);
+
+        if (!Control::_ThisAtom)
+            throw std::logic_error("The atom for control could not be loaded!");
     }
     Control::~Control()
     {
@@ -82,7 +79,31 @@ namespace Core::UI::Controls
         case WM_TIMER:
             return Data->TimerTick(static_cast<LONG>(wp));
         case WM_CHAR:
-            return Data->Char(wp);
+        {
+            WORD VKCode = LOWORD(wp);
+
+            WORD KeyFlags = HIWORD(lp);
+            int ScanCode = LOBYTE(KeyFlags);
+            bool IsExtendedKey = (KeyFlags & KF_EXTENDED) == KF_EXTENDED;
+
+            if (IsExtendedKey)
+                ScanCode = MAKEWORD(ScanCode, 0xE0);
+
+            bool WasKeyDown = (KeyFlags & KF_REPEAT) == KF_REPEAT;
+            WORD RepeatCount = LOWORD(lp);
+            bool IsKeyReleased = (KeyFlags & KF_UP) == KF_UP;
+
+            switch (VKCode)
+            {
+            case VK_SHIFT:
+            case VK_CONTROL:
+            case VK_MENU:
+                VKCode = LOWORD(MapVirtualKey(ScanCode, MAPVK_VSC_TO_VK_EX));
+            }
+
+            Data->Char(static_cast<wchar_t>(VKCode), static_cast<int>(RepeatCount), static_cast<int>(ScanCode), IsExtendedKey, WasKeyDown, IsKeyReleased);
+            return 0;
+        }
         case WM_COMMAND:
         {
             LRESULT Return = Data->Command(wp, lp);
@@ -128,31 +149,5 @@ namespace Core::UI::Controls
     void Control::Redraw()
     {
         RedrawWindow(_Base, nullptr, nullptr, RDW_INVALIDATE | RDW_ERASENOW);
-    }
-    void Control::Move(int x, int y, int width, int height)
-    {
-        MoveWindow(_Base, x, y, width, height, true);
-    }
-    void Control::Placement(RECT& WndRect) const
-    {
-        GetWindowRect(_Base, &WndRect);
-    }
-    int Control::XCoord() const
-    {
-        RECT Place;
-        Placement(Place);
-
-        MapWindowPoints(HWND_DESKTOP, GetParent(_Base), reinterpret_cast<LPPOINT>(&Place), 2);
-
-        return Place.left;
-    }
-    int Control::YCoord() const
-    {
-        RECT Place;
-        Placement(Place);
-
-        MapWindowPoints(HWND_DESKTOP, GetParent(_Base), reinterpret_cast<LPPOINT>(&Place), 2);
-
-        return Place.top;
     }
 }

@@ -1,14 +1,14 @@
 #pragma once
 
 #include <Windows.h>
-#include "..\UICommon.h"
-#include "..\..\Color.h"
-#include "..\..\Container.h"
-#include "..\..\Str.h"
+#include <string>
+#include <vector>
 
-#if (!defined(_WIN32) and !defined(_WIN64)) or !defined(__cplusplus)
-#error Win32 or Win64 is required, and the code must be compled in C++
-#endif
+#include "..\UICommon.h"
+#include "..\Style\Style.h"
+
+//Dll Entry Point
+bool __stdcall DllMain(HINSTANCE, DWORD, LPVOID);
 
 namespace Core::UI::Controls
 {
@@ -22,95 +22,64 @@ namespace Core::UI::Controls
         TA_RightAlignment
     };
 
-    struct CORE_API StyleSheet
-    {
-        StyleSheet()
-        {
-            Background = 0xFF000000;
-            BorderBrush = 0xFF000000;
-            BorderThickness = 0;
-            Radius = 0;
-        }
-
-        AaColor Background;
-        AaColor BorderBrush;
-        AaColor BaseBackground;
-        int BorderThickness;
-        int Radius;
-    };
-    struct CORE_API TextStyleSheet
-    {
-        AaColor Foreground = 0xFFFFFFFF;
-        String FontFamily;
-        int FontSize = 12, CharSpacing = 0;
-        bool Bold = false;
-        bool Italic = false;
-        bool Underline = false;
-
-        TextAlignment Alignment = TextAlignment::TA_LeftAlignment;
-    };
-
     class CORE_API Control
     {
+    private:
+        static LRESULT __stdcall CommonWndProc(HWND Window, UINT Message, WPARAM wp, LPARAM lp);
+        static void RegisterAtom(HINSTANCE ins);
+        static ATOM _ThisAtom;
+
     protected:
         HWND _Base = nullptr;
         bool IsEnabled = true;
 
-        static LRESULT __stdcall CommonWndProc(HWND Window, UINT Message, WPARAM wp, LPARAM lp);
+        Style ThisStyle;
+        StyleSchematic StyleSchema;
+
+        ATOM GetAtom() const;
 
         virtual bool FocusOnClick() const { return true; }
+        virtual void ProcessExtraMessage(UINT Message, WPARAM wp, LPARAM lp);
     public:
-        Control();
+        Control(HINSTANCE ins);
         virtual ~Control();
 
-        virtual LRESULT KeyDown(WPARAM key);
-        virtual LRESULT Create() { return 0; }
-        virtual LRESULT Paint() { return 0; }
-        virtual LRESULT OnDestroy() { return 0; }
-        virtual LRESULT Click() { return 0; }
-        virtual LRESULT DoubleClick() { return SendMessageW(GetParent(_Base), WM_LBUTTONDBLCLK, 0, 0); }
-        virtual LRESULT RDoubleClick() { return SendMessageW(GetParent(_Base), WM_RBUTTONDBLCLK, 0, 0); }
-        virtual LRESULT MouseUp() { return 0; }
-        virtual LRESULT TimerTick(LONG ID) { return 0; }
-        virtual LRESULT Char(WPARAM ID) { return 0; }
-        virtual LRESULT Command(WPARAM ID, LPARAM lp) { return SendMessageW(GetParent(_Base), WM_COMMAND, ID, lp); }
-        virtual LRESULT Size() { return 0; }
-        virtual LRESULT GotFocus() { return 0; }
-        virtual LRESULT LostFocus() { return 0; }
-        virtual LRESULT RightClick() { return SendMessageW(GetParent(_Base), WM_RBUTTONDOWN, 0,0); }
+        // !! IMPORTANT !! The DllMain function is responsible for cleaning starting and closing out the ATOM.
+        friend bool __stdcall ::DllMain(HINSTANCE, DWORD, LPVOID);
+
+        //Basic Management
+        virtual void Create() { }
+        virtual void Paint() { }
+        virtual void OnDestroy() { }
+
+        //User Input
+        virtual void KeyDown(WPARAM key);
+        virtual void Char(wchar_t Character, int RepeatCount, int ScanCode, bool ExtendedKey, bool PrevStatePressed, bool IsBeingReleased) { }
+        virtual void Click() {  }
+        virtual void DoubleClick() { SendMessage(GetParent(_Base), WM_LBUTTONDBLCLK, 0, 0); }
+        virtual void RDoubleClick() { SendMessage(GetParent(_Base), WM_RBUTTONDBLCLK, 0, 0); }
+        virtual void MouseUp() { }
+        virtual void RightClick() { SendMessage(GetParent(_Base), WM_RBUTTONDOWN, 0, 0); }
+
+        //Windows Events
+        virtual void TimerTick(long TimerID) { }
+        virtual void OnSize();
+        virtual void OnMove();
+        virtual void GotFocus() { }
+        virtual void LostFocus() { }
+        virtual void Command(WPARAM ID, LPARAM lp) { SendMessage(GetParent(_Base), WM_COMMAND, ID, lp); }
 
         bool Enabled();
         void Enabled(bool New);
 
         virtual void Redraw();
-        virtual void Move(int X, int Y, int Width, int Height);
 
-        void Placement(RECT& WndRect) const;
-        int XCoord() const;
-        int YCoord() const;
+        Style& GetStyle() const;
+        void SetStyle(const StyleSheet& New);
 
-        operator HWND()
+        explicit operator HWND() const
         {
             return _Base;
         }
     };
-
-    class CORE_API StyledControl : public Control
-    {
-    protected:
-        StyleSheet _Style;
-        TextStyleSheet _TextStyle;
-    public:
-        StyleSheet const& Style = _Style;
-        TextStyleSheet const& TextStyle = _TextStyle;
-
-        void Background(const AaColor& New);
-        void BorderBrush(const AaColor& New);
-        void BorderThickness(int New);
-        void SetStyle(const StyleSheet& New);
-        void SetTextStyle(const TextStyleSheet& New);
-    };
-
-    void CORE_API GetClientRect(Control* Source, LPRECT Dest);
-    void CORE_API GetWindowRect(Control* Source, LPRECT Dest);
 }
