@@ -403,3 +403,5 @@ FodyWeavers.xsd
 
 # JetBrains Rider
 *.sln.iml
+/Foundations.sln
+/Final Versions/Version 1.zip

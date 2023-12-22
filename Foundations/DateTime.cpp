@@ -1,9 +1,7 @@
-#include "DateTime.h"
+#include "DateTime.h" 
 
-#include "Container.h"
-#include "Str.h"
-
-#include <chrono>
+#include <sstream>
+#include <fstream>
 
 using namespace std;
 using namespace std::chrono;
@@ -70,7 +68,7 @@ namespace Core
 
 		_Dur = Y + M + D + H + Mi + S + Ms;
 	}
-	DateTime::DateTime(duration<double> Dur)
+	DateTime::DateTime(const duration<double>& Dur)
 	{
 		_Dur = Dur;
 	}
@@ -223,38 +221,43 @@ namespace Core
 		return New; //All that is left is simply H:M:S:MS. No further action must take place.
 	}
 
-	String DateTime::ToString(DateStringFormat Format) const
+	std::string DateTime::ToString(DateStringFormat Format) const
 	{
 		int Year = this->Year(), Month = this->Month(), Day = this->Day(), Hour = this->Hour(), Minute = this->Minute(), Second = this->Second(), Millisecond = this->Millisecond();
 
-		String Return;
+		stringstream Return;
 
 		if (*this == DateTime())
-			return L"No Data to Display";
+			return "No Data";
 
 		switch (Format)
 		{
 		case DateStringFormat::Date:
 		{
 			if (Day != 0 && Year != 0 && Month != 0)
-				Return = String(Month) + String(L"/") + String(Day) + String(L"/") + String(Year);
+				Return << Month << "/" << Day << "/" << Year;
 			else
-				Return = L"No Date";
+				return "No Data";
 			break;
 		}
 		case DateStringFormat::Duration:
 		{
 			if (Year == 0 && Month == 0 && Day == 0 && Hour == 0 && Minute == 0 && Second == 0)
-				return L"No Time";
+				return "No Data";
 
-			String Y = Year == 0 ? String() : String(Year) + (Year == 1 ? L"Year" : L"Years");
-			String M = Month == 0 ? String() : String(Month) + (Month == 1 ? L"Month" : L"Months");
-			String D = Day == 0 ? String() : String(Day) + (Day == 1 ? L"Day" : L"Days");
-			String H = Hour == 0 ? String() : String(Hour) + (Hour == 1 ? L"Hour" : L"Hours");
-			String Mi = Minute == 0 ? String() : String(Minute) + (Minute == 1 ? L"Minute" : L"Minutes");
-			String S = Second == 0 ? String() : String(Second) + (Second == 1 ? L"Second" : L"Seconds");
+			std::string Y = Year == 0 ? "" : to_string(Year) + (Year == 1 ? "Year" : "Years"),
+						M = Month == 0 ? "" : to_string(Month) + (Month == 1 ? "Month" : "Months"),
+						D = Day == 0 ? "" : to_string(Day) + (Day == 1 ? "Day" : "Days"),
+						H = Hour == 0 ? "" : to_string(Hour) + (Hour == 1 ? "Hour" : "Hours"),
+						Mi = Minute == 0 ? "" : to_string(Minute) + (Minute == 1 ? "Minute" : "Minutes"),
+						S = Second == 0 ? "" : to_string(Second) + (Second == 1 ? "Second" : "Seconds");
 
-			Return = Y + (Y == String() ? String() : L", ") + String(M) + String(M == String() ? String() : L", ") + String(D) + (D == String() ? String() : L", ") + String(H) + (H == String() ? String() : L", ") + Mi + (Mi == String() ? String() : L", ") + String(S) + (S == String() ? String() : L", ");
+			Return << Y << (Y.length() == 0 ? "" : ", ") <<
+				M << (!M.length() ? "" : ", ") <<
+				D << (!D.length() ? "" : ", ") <<
+				H << (!H.length() ? "" : ", ") <<
+				Mi << (!Mi.length() ? "" : ", ") <<
+				S << (!S.length() ? "" : ".");
 			break;
 		}
 		case DateStringFormat::LongDate:
@@ -264,114 +267,128 @@ namespace Core
 				switch (Month)
 				{
 				case 1:
-					Return = L"January";
+					Return << "January";
 					break;
 				case 2:
-					Return = L"February";
+					Return << "February";
 					break;
 				case 3:
-					Return = L"March";
+					Return << "March";
 					break;
 				case 4:
-					Return = L"April";
+					Return << "April";
 					break;
 				case 5:
-					Return = L"May";
+					Return << "May";
 					break;
 				case 6:
-					Return = L"June";
+					Return << "June";
 					break;
 				case 7:
-					Return = L"July";
+					Return << "July";
 					break;
 				case 8:
-					Return = L"August";
+					Return << "August";
 					break;
 				case 9:
-					Return = L"September";
+					Return << "September";
 					break;
 				case 10:
-					Return = L"October";
+					Return << "October";
 					break;
 				case 11:
-					Return = L"November";
+					Return << "November";
 					break;
 				case 12:
-					Return = L"December";
+					Return << "December";
 					break;
 				}
 
-				Return += (L" ") + String(Day);
+				Return << ' ' << Day;
 				switch (Day)
 				{
 				case 1:
 				case 21:
 				case 31:
-					Return += L"st";
+					Return << "st";
 					break;
 
 				case 2:
 				case 22:
-					Return += L"nd";
+					Return << "nd";
 					break;
 
 				case 3:
 				case 23:
-					Return += L"rd";
+					Return << "rd";
 					break;
 
 				default:
-					Return += L"th";
+					Return << "th";
 					break;
 				}
 
-				Return += String(L", ") + String(Year);
+				Return << ", " << Year;
 			}
 
 			if (Hour != 0 && Minute != 0)
-				Return += (Year == 0 || Month == 0 || Day == 0 ? L"" : String(L" at ")) + String(Hour > 12 ? Hour - 12 : Hour) + L":" + String(Minute) + String(Hour < 12 ? L"AM" : L"PM");
+			{
+				if (Year == 0 || Month == 0 || Day == 0)
+					Return << " at ";
+
+				Return << (Hour > 12 ? Hour - 12 : Hour) << ':' << Minute << ' ' << (Hour < 12 ? "AM" : "PM");
+			}
 			break;
 		}
 		case DateStringFormat::ShortDate:
 		{
+			if (Day == 0 && Year == 0 && Month == 0 && Hour == 0 && Minute == 0)
+				return "No Data";
+
 			if (Day != 0 && Year != 0 && Month != 0)
-				Return = String(Month) + String(L"/") + String(Day) + String(L"/") + String(Year);
+				Return << Month << '/' << Day << '/' << Year;
 
 			if (Hour != 0 && Minute != 0)
-				Return += (Year == 0 || Month == 0 || Day == 0 ? L"" : String(L" at ")) + String(Hour > 12 ? Hour - 12 : Hour) + L":" + String(Minute) + String(Hour < 12 ? L"AM" : L"PM");
+			{
+				if (Year == 0 || Month == 0 || Day == 0)
+					Return << " at ";
+
+				Return << (Hour > 12 ? Hour - 12 : Hour) << ':' << Minute << ' ' << (Hour < 12 ? "AM" : "PM");
+			}
 			break;
 		}
 		case DateStringFormat::Time:
 		{
 			if (Hour != 0 && Minute != 0)
-				Return += (Year == 0 || Month == 0 || Day == 0 ? L"" : String(L" at ")) + String(Hour > 12 ? Hour - 12 : Hour) + L":" + String(Minute) + String(Hour < 12 ? L"AM" : L"PM");
+				Return << (Hour > 12 ? Hour - 12 : Hour) << ':' << Minute << ' ' << (Hour < 12 ? "AM" : "PM");
 			else
-				Return = L"No Time";
+				return "No Time";
 			break;
 		}
 		}
 
-		return Return;
+		return Return.str();
+	}
+	std::string DateTime::ToBackString() const
+	{
+		return to_string(_Dur.count());
+	}
+	DateTime DateTime::FromBackString(const std::string& Value)
+	{
+		stringstream Stream(Value);
+		double NumVal = 0.0;
+		Stream >> NumVal;
+
+		return DateTime(duration<double>(NumVal));
 	}
 
-	String DateTime::ToBackString() const
+	bool DateTime::operator==(const DateTime& Two) const
 	{
-		return _Dur.count();
+		return _Dur == Two._Dur;
 	}
-	DateTime DateTime::FromBackString(const String& Value)
+	bool DateTime::operator!=(const DateTime& Two) const
 	{
-		duration<double> Raw(Value.ToDouble());
-
-		return DateTime(Raw);
-	}
-
-	bool operator==(const DateTime& One, const DateTime& Two)
-	{
-		return One._Dur == Two._Dur;
-	}
-	bool operator!=(const DateTime& One, const DateTime& Two)
-	{
-		return !(One == Two);
+		return _Dur != Two._Dur;
 	}
 
 	bool DateTime::operator<(const DateTime& Two) const
@@ -382,18 +399,14 @@ namespace Core
 	{
 		return _Dur > Two._Dur;
 	}
-	std::partial_ordering DateTime::operator<=>(const DateTime& Two) const
-	{
-		return _Dur <=> Two._Dur;
-	}
 
-	DateTime operator-(const DateTime& One, const DateTime& Two)
+	DateTime DateTime::operator+(const DateTime& Two) const
 	{
-		return DateTime(One._Dur - Two._Dur);
+		return DateTime(_Dur + Two._Dur);
 	}
-	DateTime operator+(const DateTime& One, const DateTime& Two)
+	DateTime DateTime::operator-(const DateTime& Two) const
 	{
-		return DateTime(One._Dur + Two._Dur);
+		return DateTime(_Dur - Two._Dur);
 	}
 	DateTime& DateTime::operator+=(const DateTime& Two)
 	{
@@ -404,5 +417,25 @@ namespace Core
 	{
 		_Dur -= Two._Dur;
 		return *this;
+	}
+
+	std::ostream& operator<<(std::ostream& out, const DateTime& Obj)
+	{
+		out << Obj.ToString(DateStringFormat::ShortDate);
+		return out;
+	}
+	std::ofstream& operator<<(std::ofstream& out, const DateTime& Obj)
+	{
+		out << Obj._Dur.count();
+		return out;
+	}
+	std::istream& operator>>(std::istream& in, DateTime& Obj)
+	{
+		double DurVal;
+		in >> DurVal;
+
+		Obj._Dur = duration<double>(DurVal);
+
+		return in;
 	}
 }
