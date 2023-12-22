@@ -163,21 +163,10 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Address.cpp" />
     <ClCompile Include="IOCommon.cpp" />
-    <ClCompile Include="Reference.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Address.h" />
-    <ClInclude Include="Element.h" />
     <ClInclude Include="IOCommon.h" />
-    <ClInclude Include="PHS\PHS.h" />
-    <ClInclude Include="PHS\PHSReader.h" />
-    <ClInclude Include="PHS\PHSWriter.h" />
-    <ClInclude Include="Reference.h" />
-    <ClInclude Include="Timelines\ActionBase.h" />
-    <ClInclude Include="Timelines\ActionID.h" />
-    <ClInclude Include="Timelines\Timeline.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
