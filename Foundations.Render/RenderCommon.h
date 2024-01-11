@@ -18,15 +18,11 @@
 
 #pragma comment(lib, "d2d1")
 
-template<class Interface>
-inline void SafeRelease(Interface** Obj)
-{
-	if (*Obj)
-	{
-		(*Obj)->Release();
-		(*Obj) = nullptr;
-	}
-}
+#ifdef FOUNDATIONSRENDER_EXPORTS
+#define RENDER_API __declspec(dllexport)
+#else
+#define RENDER_API __declspec(dllimport)
+#endif
 
 #ifndef Assert
 
@@ -37,5 +33,18 @@ inline void SafeRelease(Interface** Obj)
 #endif  //Debug
 
 #endif //Assert
+
+namespace Core::Render
+{
+	template<class Interface>
+	inline void SafeRelease(Interface** Obj)
+	{
+		if (*Obj)
+		{
+			(*Obj)->Release();
+			(*Obj) = nullptr;
+		}
+	}
+}
 
 #endif //RENDERBASE_H

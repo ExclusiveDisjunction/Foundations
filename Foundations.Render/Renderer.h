@@ -1,50 +1,44 @@
 #pragma once
 
-#include "RenderBase.h"
+#include "RenderCommon.h"
 
-class Renderer;
-class Renderable;
-class RenderWindow;
-
-class Renderer
+namespace Core::Render
 {
-public:
-	Renderer(RenderWindow* Target);
-	Renderer(const Renderer& Obj) = delete;
-	Renderer(Renderer&& Obj) = delete;
-	~Renderer();
+	class RENDER_API Renderer;
+	class RENDER_API Renderable;
 
-	Renderer& operator=(const Renderer& Obj) = delete;
-	Renderer& operator=(Renderer&& Obj) = delete;
+	class RENDER_API Renderer
+	{
+	private:
+		ID2D1Factory* Factory = nullptr;
+		std::vector<Renderable*> Renderables;
+		D2D1_MATRIX_3X2_F Transform = D2D1::Matrix3x2F::Identity();
 
-	void Init();
-	D2D1_SIZE_F GetSize() const;
-	void RequestRedraw();
+		HRESULT CreateIndependentResources();
+	protected:
+		//Call this when render is needed.
+		HRESULT OnRender();
 
-	void RegisterOnSizeEvent(void* Obj, std::function<void(void*, D2D1_SIZE_U)> Callable);
-	void DeRegisterOnSizeEvent(void* Obj);
+		virtual HRESULT CreateDependentResources(ID2D1Factory* Factory) = 0;
+		virtual void DiscardDependentResources();
 
-	D2D1_MATRIX_3X2_F GetTransform() const;
-	void SetTransform(const D2D1_MATRIX_3X2_F& New);
+		virtual ID2D1RenderTarget* GetTarget() const = 0;
+	public:
+		Renderer();
+		Renderer(const Renderer& Obj) = delete;
+		Renderer(Renderer&& Obj) = delete;
+		~Renderer();
 
-	ID2D1Factory* GetFactory() { return Factory; }
+		friend Renderable;
 
-	friend Renderable;
-	friend RenderWindow;
+		Renderer& operator=(const Renderer& Obj) = delete;
+		Renderer& operator=(Renderer&& Obj) = delete;
 
-private:
-	RenderWindow* Target = nullptr;
-	ID2D1Factory* Factory = nullptr;
-	ID2D1HwndRenderTarget* RenderTarget = nullptr;
-	D2D1_MATRIX_3X2_F Transform = D2D1::Matrix3x2F::Identity();
+		bool Init();
+		D2D1_SIZE_F GetSize() const;
+		virtual void RequestRedraw() = 0;
 
-	std::vector<Renderable*> Renderables;
-	std::map<void*, std::function<void(void*, D2D1_SIZE_U)>> OnSizeEvents;
-
-	HRESULT CreateDevIndpResx();
-	HRESULT CreateDevDepResx();
-	void DiscardDevResx();
-
-	HRESULT OnRender();
-	void OnResize(UINT Width, UINT Height);
-};
+		D2D1_MATRIX_3X2_F GetTransform() const;
+		void SetTransform(const D2D1_MATRIX_3X2_F& New);
+	};
+}

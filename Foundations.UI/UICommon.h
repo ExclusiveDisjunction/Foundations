@@ -5,7 +5,6 @@
 #include <vector>
 
 #include "Common.h"
-#include "Color.h"
 #include "Controls\Control.h"
 
 #include <gdiplus.h>
