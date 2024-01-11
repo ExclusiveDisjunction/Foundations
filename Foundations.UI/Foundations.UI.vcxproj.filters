@@ -63,9 +63,6 @@
     <ClCompile Include="Windows\FooterHost.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="UICommon.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Editors\Window\SideHost.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -85,6 +82,24 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Editors\EditorRegistry.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Style\StyleType.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Style\StyleSchematicElement.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Style\StyleSchematic.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Style\StyleSheet.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Style\Style.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="UICommon.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -162,6 +177,18 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Editors\EditorRegistry.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Style\StyleSchematic.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Style\StyleType.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Style\StyleSheet.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Style\Style.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

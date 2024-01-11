@@ -2,22 +2,30 @@
 
 namespace Core::UI
 {
-	//AaColor Background1;
-	//AaColor Background2;
-	
-	//AaColor Accent1;
-	//AaColor Accent2;
-	//AaColor Accent3;
-	//AaColor Accent4;
+	String GetText(HWND Window)
+	{
+		int TextLen = static_cast<int>(GetWindowTextLength(Window)) + 1;
+#if defined(UNICODE)
+		wchar_t* Chars = new wchar_t[TextLen];
+#else
+		char* Chars = new char[TextLen];
+#endif
 
-	//AaColor Gray1;
-	//AaColor Gray2;
-	//AaColor Grey3;
-	//AaColor FontColor;
-	//AaColor EditorGray;
+		GetWindowText(Window, Chars, TextLen);
+		String Return(Chars);
 
-	//HICON ProgramIcon;
-	//HCURSOR ProgramCursor;
-	//String StandardFontName;
-	//String TitleFontName;
+		delete[] Chars;
+		return Return;
+	}
+
+	void SetText(HWND Window, String New)
+	{
+#if defined(UNICODE)
+		const wchar_t* Chars = New.c_str();
+#else
+		const char* Chars = New.c_str();
+#endif
+
+		SendMessage(Window, WM_SETTEXT, 0, reinterpret_cast<LPARAM>(Chars));
+	}
 }

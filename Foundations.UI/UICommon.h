@@ -1,34 +1,35 @@
 #pragma once
 
-#include "Controls\Control.h"
-#include "Common.h"
-#include "Color.h"
+#include <Windows.h>
+#include <string>
+#include <vector>
 
-#include "Str.h"
+#include "Common.h"
+#include "Controls\Control.h"
 
 #include <gdiplus.h>
 #pragma comment (lib, "gdiplus.lib")
 
+#if (!defined(_WIN32) and !defined(_WIN64)) or !defined(__cplusplus)
+#error Win32 or Win64 is required, and the code must be compled in C++
+#endif
+
+#ifdef FOUNDATIONSUI_EXPORTS
+#define UI_API _declspec(dllexport)
+#else
+#define UI_API _declspec(dllimport)
+#endif
+
 namespace Core::UI
 {
-	static Color Background1;
-	static Color Background2;
+#if defined(UNICODE)
+	using String = std::wstring;
+#else
+	using String = std::string;
+#endif
 
-	static Color Accent1;
-	static Color Accent2;
-	static Color Accent3;
-	static Color Accent4;
+	using Char = CHAR;
 
-	static Color Gray1;
-	static Color Gray2;
-	static Color Gray3;
-	static Color FontColor;
-	static Color EditorGray;
-
-	static HICON ProgramIcon;
-	static HCURSOR ProgramCursor;
-	static String StandardFontName;
-	static String TitleFontName;
-
-
+	String UI_API GetText(HWND Window);
+	void UI_API SetText(HWND Window, String New);
 }

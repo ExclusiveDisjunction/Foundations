@@ -1,33 +1,31 @@
 #pragma once
 
-#include "Control.h"
+#include "Win32 Common.h"
+#include "ControlBase.h"
 
-namespace Core::UI::Controls
+class Grid : public ControlBase
 {
-	class CORE_API Grid : public Control
+private:
+	static LRESULT __stdcall WndProc(HWND, UINT, WPARAM, LPARAM);
+	static ATOM _ThisAtom;
+
+	StyleSheet _Style;
+public:
+	Grid(int X, int Y, int Width, int Height, HWND Parent, HINSTANCE ins, StyleSheet Style);
+	Grid(int X, int Y, int Width, int Height, ControlBase* Parent, HINSTANCE ins, StyleSheet Style) : Grid(X, Y, Width, Height, *Parent, ins, Style) {}
+
+	StyleSheet GetStyle()
 	{
-	private:
-		static LRESULT __stdcall WndProc(HWND, UINT, WPARAM, LPARAM);
-		static ATOM _ThisAtom;
+		return _Style;
+	}
+	void SetStyle(StyleSheet Style)
+	{
+		_Style = Style;
 
-		StyleSheet _Style;
-	public:
-		Grid(int X, int Y, int Width, int Height, HWND Parent, HINSTANCE ins, StyleSheet Style);
-		Grid(int X, int Y, int Width, int Height, Control* Parent, HINSTANCE ins, StyleSheet Style) : Grid(X, Y, Width, Height, *Parent, ins, Style) {}
+		RedrawWindow(_Base, NULL, NULL, RDW_ERASENOW | RDW_INVALIDATE);
+	}
 
-		StyleSheet GetStyle()
-		{
-			return _Style;
-		}
-		void SetStyle(StyleSheet Style)
-		{
-			_Style = Style;
+	LRESULT Paint() override;
 
-			RedrawWindow(_Base, NULL, NULL, RDW_ERASENOW | RDW_INVALIDATE);
-		}
-
-		LRESULT Paint() override;
-
-		static void InitBase(HINSTANCE ins);
-	};
-}
+	static void InitBase(HINSTANCE ins);
+};

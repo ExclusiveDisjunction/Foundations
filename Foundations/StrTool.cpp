@@ -49,7 +49,7 @@ std::string::const_iterator CORE_API StrContains(const string& obj, const std::s
 			if (numLeft < Other.size()) //If the number of chars in the obj string left is less than the number of strings in other, then it will never contain the other string.
 				return obj.end();
 
-			Streak == true;
+			Streak = true;
 			ocurr++;
 			Return = curr;
 			continue;
@@ -80,6 +80,8 @@ bool CORE_API StrBeginsWith(const std::string& obj, const std::string& strseq)
 		else  //Character variation found.
 			return false;
 	}
+
+	return true;
 }
 
 std::string CORE_API StrToLower(const std::string& Obj)

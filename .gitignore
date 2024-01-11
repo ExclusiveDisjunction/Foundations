@@ -7,6 +7,8 @@
 
 Build/
 Publish/
+Versions/
+Testing/
 
 *.sln
 
