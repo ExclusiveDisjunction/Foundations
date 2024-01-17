@@ -18,70 +18,46 @@
     <ClCompile Include="dllmain.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Controls\Button.cpp">
+    <ClCompile Include="Base\Button.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Controls\CalendarGrid.cpp">
+    <ClCompile Include="Base\CalendarGrid.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Controls\CheckableButton.cpp">
+    <ClCompile Include="Base\CheckableButton.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Controls\ComboBox.cpp">
+    <ClCompile Include="Base\ComboBox.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Controls\Control.cpp">
+    <ClCompile Include="Control.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Controls\Grid.cpp">
+    <ClCompile Include="Base\Grid.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Controls\ImageViewer.cpp">
+    <ClCompile Include="Base\ImageViewer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Controls\Label.cpp">
+    <ClCompile Include="Base\Label.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Controls\ProgressBar.cpp">
+    <ClCompile Include="Base\ProgressBar.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Controls\ScrollViewer.cpp">
+    <ClCompile Include="Base\ScrollViewer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Controls\StyleButton.cpp">
+    <ClCompile Include="Base\StyleButton.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Controls\StyledControl.cpp">
+    <ClCompile Include="Base\TextBox.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Controls\TextBox.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Controls\ToggleButton.cpp">
+    <ClCompile Include="Base\ToggleButton.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Windows\FooterHost.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Editors\Window\SideHost.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Editors\Editor.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Editors\EditorButton.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Editors\EditorButtonHost.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Editors\EditorHost.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Editors\EditorPopout.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Editors\EditorRegistry.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Style\StyleType.cpp">
@@ -102,45 +78,48 @@
     <ClCompile Include="UICommon.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Layout\Position.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Controls\Button.h">
+    <ClInclude Include="Base\Button.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Controls\CalendarGrid.h">
+    <ClInclude Include="Base\CalendarGrid.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Controls\CheckableButton.h">
+    <ClInclude Include="Base\CheckableButton.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Controls\ComboBox.h">
+    <ClInclude Include="Base\ComboBox.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Controls\Control.h">
+    <ClInclude Include="Control.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Controls\Grid.h">
+    <ClInclude Include="Base\Grid.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Controls\ImageViewer.h">
+    <ClInclude Include="Base\ImageViewer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Controls\Label.h">
+    <ClInclude Include="Base\Label.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Controls\ProgressBar.h">
+    <ClInclude Include="Base\ProgressBar.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Controls\ScrollViewer.h">
+    <ClInclude Include="Base\ScrollViewer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Controls\StyleButton.h">
+    <ClInclude Include="Base\StyleButton.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Controls\TextBox.h">
+    <ClInclude Include="Base\TextBox.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Controls\ToggleButton.h">
+    <ClInclude Include="Base\ToggleButton.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Windows\FooterHost.h">
@@ -150,33 +129,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="UICommon.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Editors\Window\SideHost.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Editors\Window\Window.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Editors\Editor.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Editors\EditorButton.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Editors\EditorButtonHost.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Editors\EditorCommon.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Editors\EditorHost.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Editors\EditorPopout.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Editors\EditorRegistry.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Style\StyleSchematic.h">
@@ -189,6 +141,12 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Style\Style.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Layout\Position.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Layout\Margin.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

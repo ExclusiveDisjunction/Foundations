@@ -1,14 +1,18 @@
 #pragma once
 
+#include <math.h>
 #include <Windows.h>
-#include <string>
+#include <d2d1.h>
+#include <d2d1helper.h>
+#include <dwrite.h>
+#include <wincodec.h>
+
+#include <functional>
 #include <vector>
+#include <string>
+#include <map>
 
 #include "Common.h"
-#include "Controls\Control.h"
-
-#include <gdiplus.h>
-#pragma comment (lib, "gdiplus.lib")
 
 #if (!defined(_WIN32) and !defined(_WIN64)) or !defined(__cplusplus)
 #error Win32 or Win64 is required, and the code must be compled in C++
