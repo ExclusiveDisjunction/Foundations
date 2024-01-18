@@ -1,0 +1,250 @@
+#include "ElementList.h"
+#include <iterator>
+
+namespace Core::IO
+{
+	ElementList::ElementList()
+	{
+
+	}
+	ElementList::ElementList(Element* Host)
+	{
+		setHost(Host);
+	}
+	ElementList::~ElementList()
+	{
+		clear();
+		if (Host)
+			Host->Children = nullptr;
+	}
+
+	bool ElementList::CanBeTakenIn(Element* New) const
+	{
+		//An element can be taken in if:
+		// 1) It exists
+		/*
+		* An element can be taken in if:
+		* 1) It exists
+		* 2) It is either unclaimed (parent == nullptr) OR the parent of the Element is the host of this list.
+		*/
+		return New && (New->Parent == nullptr || New->Parent == Host);
+	}
+
+	ElementList::iterator ElementList::operator[](size_t i) noexcept
+	{
+		return ItemAt(i);
+	}
+	ElementList::iterator ElementList::ItemAt(size_t i) noexcept
+	{
+		if (i >= _size)
+			return end();
+
+		return begin() + i;
+	}
+	ElementList::const_iterator ElementList::operator[](size_t i) const noexcept
+	{
+		return ItemAt(i);
+	}
+	ElementList::const_iterator ElementList::ItemAt(size_t i) const noexcept
+	{
+		if (i >= _size)
+			return end();
+
+		return begin() + i;
+	}
+
+	Element* ElementList::getHost() const
+	{
+		return Host;
+	}
+	void ElementList::setHost(Element* newHost)
+	{
+		if (Host)
+			Host->Children = nullptr;
+
+		if (newHost)
+		{
+			if (!newHost->CanHaveChildren)
+				throw std::logic_error("ERROR: The elected host does not support children.");
+
+			if (newHost->Children)
+				delete Host->Children;
+
+			newHost->Children = this;
+		}
+		
+		this->Host = newHost;
+	}
+
+	void ElementList::resize(std::size_t newSize)
+	{
+		if (newSize == _size)
+			return;
+
+		clear();
+		_size = newSize;
+
+		if (newSize == 0)
+			return;
+
+		Element* current = nullptr;
+		for (size_t i = 0; i < newSize; i++)
+		{
+			Element* temp = current;
+			current = new Element(Host);
+
+			if (!First)
+				First = current;
+
+			if (temp)
+				temp->Next = current;
+			current->Last = temp;
+		}
+		Last = current;
+	}
+	void ElementList::clear()
+	{
+		_size = 0;
+
+		if (!First || !Last)
+			return;
+		else if (First == Last)
+		{
+			delete First;
+			First = Last = nullptr;
+			return;
+		}
+
+		Element* current = First;
+		while (current)
+		{
+			Element* temp = current->Next;
+			delete current;
+
+			current = temp;
+		}
+
+		First = Last = nullptr;
+	}
+
+	void ElementList::push_back(Element* New)
+	{
+		if (!CanBeTakenIn(New))
+			throw std::logic_error("ERROR: 'New' is nullptr, OR 'New' is owned by another parent.");
+
+		if (_size == 0)
+		{
+			First = Last = New;
+			First->Last = nullptr;
+			First->Next = nullptr;
+		}
+		else if (_size == 1)
+		{
+			First->Next = New;
+			Last = New;
+			Last->Next = nullptr;
+			Last->Last = First;
+		}
+		else
+		{
+			Last->Next = New;
+			New->Last = Last;
+			Last = New;
+		}
+
+		New->Parent = Host;
+		_size++;
+	}
+	void ElementList::insert(Element* New, ElementList::iterator after)
+	{
+		if (after == end() || !CanBeTakenIn(New))
+			throw std::logic_error("ERROR: 'after' is ATE, 'New' is nullptr, OR 'New' is owned by another parent.");
+
+		if (*after == Last) //Covers if the _size == 1 && if after is the last element.
+		{
+			Last->Next = New;
+			New->Last = Last;
+			New->Next = nullptr;
+
+			Last = New;
+		}
+		else
+		{
+			Element* target = *after;
+			if (!target)
+				return;
+
+			Element* targetsNext = target->Next;
+			
+			target->Next = New;
+			New->Last = target;
+
+			if (targetsNext)
+				targetsNext->Last = New;
+			New->Next = targetsNext;
+		}
+
+		New->Parent = Host;
+		_size++;
+	}
+	void ElementList::pop_back()
+	{
+		if (_size == 0)
+			return;
+		else if (_size == 1)
+		{
+			delete First;
+			First = Last = nullptr;
+
+			_size = 0;
+		}
+		else
+		{
+			Element* Prev = Last->Last;
+			Prev->Next = nullptr;
+			
+			delete Last;
+			Last = nullptr;
+			_size--;
+		}
+	}
+	void ElementList::erase(ElementList::iterator At)
+	{
+		if (At == end())
+			return;
+
+		Element* Ptr = *At;
+		Element* Prev = Ptr->Last,
+			* Next = Ptr->Next;
+
+		if (Prev)
+			Prev->Next = Next;
+		if (Next)
+			Next->Last = Prev;
+
+		delete Ptr;
+		_size--;
+
+		if (_size == 0)
+			First = Last = nullptr;
+		if (_size == 1)
+			First = Last;
+	}
+
+	ElementList::iterator ElementList::begin()
+	{
+		return _size == 0 ? end() : ElementList::iterator(First);
+	}
+	ElementList::iterator ElementList::end()
+	{
+		return (nullptr);
+	}
+	ElementList::const_iterator ElementList::begin() const 
+	{
+		return _size == 0 ? end() : ElementList::const_iterator(First);
+	}
+	ElementList::const_iterator ElementList::end() const 
+	{
+		return ElementList::const_iterator(nullptr);
+	}
+}

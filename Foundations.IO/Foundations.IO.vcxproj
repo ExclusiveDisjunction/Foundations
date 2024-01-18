@@ -163,9 +163,16 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="ElementIterator.cpp" />
+    <ClCompile Include="ElementList.cpp" />
     <ClCompile Include="IOCommon.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Constraints.h" />
+    <ClInclude Include="Element.h" />
+    <ClInclude Include="ElementIterator.h" />
+    <ClInclude Include="ElementList.h" />
+    <ClInclude Include="FileInstance.h" />
     <ClInclude Include="IOCommon.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
