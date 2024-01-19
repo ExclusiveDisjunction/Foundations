@@ -1,16 +1,23 @@
 #pragma once
 
 #include "IOCommon.h"
-#include "Constraints.h"
 #include <map>
 
 namespace Core::IO
 {
-	class IO_API FileInstance;
 	class IO_API ElementList;
-	template<ElementSimilar ElementT>
+	template<typename ElementT>
 	class IO_API ElementIterator;
 
+	enum ElementState
+	{
+		ES_Modified = 1,
+		ES_CanHaveChildren = 2
+	};
+
+	/// <summary>
+	/// A node in the Element tree. This is the backbone that other types can be made from to hold data.
+	/// </summary>
 	class IO_API Element
 	{
 	private:
@@ -19,14 +26,12 @@ namespace Core::IO
 
 		std::string Type;
 		unsigned int ID = 0;
-		bool IsModified = false;
+		unsigned int State = 0;
 
-	protected:		
-		Element(Element* Parent, bool CanHaveChildren) noexcept;
 		ElementList* Children = nullptr;
-		bool CanHaveChildren = true;
+	protected:		
+		Element(Element* Parent, bool CanHaveChildren);
 
-		virtual void GetAttributes(const std::map<std::string, std::string>& Out);
 	public:
 		Element(Element* Parent) noexcept : Element(Parent, true) {}
 		Element(const Element& Obj) noexcept = delete;
@@ -37,13 +42,13 @@ namespace Core::IO
 
 		friend IO_API ElementList;
 		friend IO_API ElementIterator<Element>;
+		friend IO_API ElementIterator<const Element>;
 
-		std::string getType() const;
-		unsigned int getID() const;
+		std::string getType() const noexcept;
+		unsigned int getID() const noexcept;
+		unsigned int getState() const noexcept;
 		
-		Element* getParent() const;
-		Element* getNextSibling() const;
-		Element* getPreviousSibling() const;
-		ElementList* getChildren() const;
+		ElementList& getChildren() const;
+		bool SupportsChildren() const noexcept { return Children != nullptr && (State & ES_CanHaveChildren); }
 	};
 }

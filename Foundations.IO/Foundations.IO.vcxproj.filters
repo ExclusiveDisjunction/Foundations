@@ -3,7 +3,7 @@
   <ItemGroup>
     <ClCompile Include="IOCommon.cpp" />
     <ClCompile Include="ElementList.cpp" />
-    <ClCompile Include="ElementIterator.cpp" />
+    <ClCompile Include="Element.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="IOCommon.h" />

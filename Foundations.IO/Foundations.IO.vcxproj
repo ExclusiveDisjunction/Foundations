@@ -163,7 +163,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="ElementIterator.cpp" />
+    <ClCompile Include="Element.cpp" />
     <ClCompile Include="ElementList.cpp" />
     <ClCompile Include="IOCommon.cpp" />
   </ItemGroup>

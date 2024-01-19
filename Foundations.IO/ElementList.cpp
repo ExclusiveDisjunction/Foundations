@@ -3,11 +3,11 @@
 
 namespace Core::IO
 {
-	ElementList::ElementList()
+	ElementList::ElementList() noexcept
 	{
 
 	}
-	ElementList::ElementList(Element* Host)
+	ElementList::ElementList(Element* Host) noexcept
 	{
 		setHost(Host);
 	}
@@ -53,7 +53,7 @@ namespace Core::IO
 		return begin() + i;
 	}
 
-	Element* ElementList::getHost() const
+	Element* ElementList::getHost() const noexcept
 	{
 		return Host;
 	}
@@ -64,11 +64,11 @@ namespace Core::IO
 
 		if (newHost)
 		{
-			if (!newHost->CanHaveChildren)
+			if (!(newHost->State & ElementState::ES_CanHaveChildren))
 				throw std::logic_error("ERROR: The elected host does not support children.");
 
 			if (newHost->Children)
-				delete Host->Children;
+				delete newHost->Children;
 
 			newHost->Children = this;
 		}
@@ -76,7 +76,7 @@ namespace Core::IO
 		this->Host = newHost;
 	}
 
-	void ElementList::resize(std::size_t newSize)
+	void ElementList::resize(std::size_t newSize) noexcept
 	{
 		if (newSize == _size)
 			return;
@@ -102,7 +102,7 @@ namespace Core::IO
 		}
 		Last = current;
 	}
-	void ElementList::clear()
+	void ElementList::clear() noexcept
 	{
 		_size = 0;
 
@@ -157,10 +157,13 @@ namespace Core::IO
 	}
 	void ElementList::insert(Element* New, ElementList::iterator after)
 	{
-		if (after == end() || !CanBeTakenIn(New))
-			throw std::logic_error("ERROR: 'after' is ATE, 'New' is nullptr, OR 'New' is owned by another parent.");
+		if (after == end() || after.getParentList() != this || !CanBeTakenIn(New))
+			throw std::logic_error("ERROR: 'after' is ATE OR 'after' is not part of this list.");
+		if (!CanBeTakenIn(New))
+			throw std::logic_error("ERROR: 'New' is nullptr, OR 'New' is owned by another parent.");
 
-		if (*after == Last) //Covers if the _size == 1 && if after is the last element.
+		Element* target = &(*after);
+		if (target == Last) //Covers if the _size == 1 && if after is the last element.
 		{
 			Last->Next = New;
 			New->Last = Last;
@@ -170,7 +173,6 @@ namespace Core::IO
 		}
 		else
 		{
-			Element* target = *after;
 			if (!target)
 				return;
 
@@ -187,7 +189,7 @@ namespace Core::IO
 		New->Parent = Host;
 		_size++;
 	}
-	void ElementList::pop_back()
+	void ElementList::pop_back() noexcept
 	{
 		if (_size == 0)
 			return;
@@ -208,12 +210,12 @@ namespace Core::IO
 			_size--;
 		}
 	}
-	void ElementList::erase(ElementList::iterator At)
+	bool ElementList::erase(ElementList::iterator At) noexcept
 	{
-		if (At == end())
-			return;
+		if (At == end() || At.getParentList() != this)
+			return false;
 
-		Element* Ptr = *At;
+		Element* Ptr = &(*At);
 		Element* Prev = Ptr->Last,
 			* Next = Ptr->Next;
 
@@ -229,22 +231,24 @@ namespace Core::IO
 			First = Last = nullptr;
 		if (_size == 1)
 			First = Last;
+
+		return true;
 	}
 
-	ElementList::iterator ElementList::begin()
+	ElementList::iterator ElementList::begin() noexcept
 	{
-		return _size == 0 ? end() : ElementList::iterator(First);
+		return _size == 0 ? end() : ElementList::iterator(First, this);
 	}
-	ElementList::iterator ElementList::end()
+	ElementList::iterator ElementList::end() noexcept
 	{
-		return (nullptr);
+		return ElementList::iterator(nullptr, this);
 	}
-	ElementList::const_iterator ElementList::begin() const 
+	ElementList::const_iterator ElementList::begin() const noexcept
 	{
-		return _size == 0 ? end() : ElementList::const_iterator(First);
+		return _size == 0 ? end() : ElementList::const_iterator(First, this);
 	}
-	ElementList::const_iterator ElementList::end() const 
+	ElementList::const_iterator ElementList::end() const noexcept
 	{
-		return ElementList::const_iterator(nullptr);
+		return ElementList::const_iterator(nullptr, this);
 	}
 }
