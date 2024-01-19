@@ -4,6 +4,8 @@
     <ClCompile Include="IOCommon.cpp" />
     <ClCompile Include="ElementList.cpp" />
     <ClCompile Include="Element.cpp" />
+    <ClCompile Include="ReferenceCore.cpp" />
+    <ClCompile Include="Reference.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="IOCommon.h" />
@@ -12,5 +14,6 @@
     <ClInclude Include="ElementList.h" />
     <ClInclude Include="ElementIterator.h" />
     <ClInclude Include="Constraints.h" />
+    <ClInclude Include="Reference.h" />
   </ItemGroup>
 </Project>

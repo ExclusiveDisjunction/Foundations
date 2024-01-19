@@ -8,6 +8,8 @@ namespace Core::IO
 	class IO_API ElementList;
 	template<typename ElementT>
 	class IO_API ElementIterator;
+	class IO_API ReferenceCore;
+	class IO_API Reference;
 
 	enum ElementState
 	{
@@ -29,6 +31,7 @@ namespace Core::IO
 		unsigned int State = 0;
 
 		ElementList* Children = nullptr;
+		ReferenceCore* RefCore = nullptr;
 	protected:		
 		Element(Element* Parent, bool CanHaveChildren);
 
@@ -36,6 +39,7 @@ namespace Core::IO
 		Element(Element* Parent) noexcept : Element(Parent, true) {}
 		Element(const Element& Obj) noexcept = delete;
 		Element(Element&& Obj) noexcept = delete;
+		~Element();
 
 		Element& operator=(const Element& Obj) noexcept = delete;
 		Element& operator=(Element&& Obj) noexcept = delete;
@@ -43,11 +47,16 @@ namespace Core::IO
 		friend IO_API ElementList;
 		friend IO_API ElementIterator<Element>;
 		friend IO_API ElementIterator<const Element>;
+		friend IO_API ReferenceCore;
 
 		std::string getType() const noexcept;
 		unsigned int getID() const noexcept;
 		unsigned int getState() const noexcept;
 		
+		Reference getReference() noexcept;
+		Reference getParent() const noexcept;
+		Reference getNextSibling() const noexcept;
+		Reference getPreviousSibling() const noexcept;
 		ElementList& getChildren() const;
 		bool SupportsChildren() const noexcept { return Children != nullptr && (State & ES_CanHaveChildren); }
 	};

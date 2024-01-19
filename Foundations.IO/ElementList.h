@@ -87,6 +87,12 @@ namespace Core::IO
 		/// <param name="at">The location of the element to remove.</param>
 		/// <returns>True if the item was removed, false if 'at' is ATE, or if 'at' is not included in this list.</returns>
 		bool erase(iterator at) noexcept;
+		/// <summary>
+		/// Removes the item at the iterator provided, without deleting the element.
+		/// </summary>
+		/// <param name="at">The location of the element to remove.</param>
+		/// <returns>True if the item was detached, false if 'at' is ATE or if 'at' is not included in the list.</returns>
+		bool detach(iterator at) noexcept;
 
 		iterator begin() noexcept;
 		iterator end() noexcept;

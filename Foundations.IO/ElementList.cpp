@@ -119,6 +119,8 @@ namespace Core::IO
 		while (current)
 		{
 			Element* temp = current->Next;
+
+			current->Next = current->Last = current->Parent;
 			delete current;
 
 			current = temp;
@@ -195,6 +197,7 @@ namespace Core::IO
 			return;
 		else if (_size == 1)
 		{
+			First->Next = First->Last = First->Parent = nullptr;
 			delete First;
 			First = Last = nullptr;
 
@@ -212,6 +215,14 @@ namespace Core::IO
 	}
 	bool ElementList::erase(ElementList::iterator At) noexcept
 	{
+		bool Result = detach(At);
+		if (Result)
+			delete &(*At);
+		
+		return Result;
+	}
+	bool ElementList::detach(ElementList::iterator At) noexcept
+	{
 		if (At == end() || At.getParentList() != this)
 			return false;
 
@@ -224,7 +235,7 @@ namespace Core::IO
 		if (Next)
 			Next->Last = Prev;
 
-		delete Ptr;
+		Ptr->Next = Ptr->Last = Ptr->Parent = nullptr;
 		_size--;
 
 		if (_size == 0)

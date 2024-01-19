@@ -166,6 +166,8 @@
     <ClCompile Include="Element.cpp" />
     <ClCompile Include="ElementList.cpp" />
     <ClCompile Include="IOCommon.cpp" />
+    <ClCompile Include="Reference.cpp" />
+    <ClCompile Include="ReferenceCore.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Constraints.h" />
@@ -174,6 +176,7 @@
     <ClInclude Include="ElementList.h" />
     <ClInclude Include="FileInstance.h" />
     <ClInclude Include="IOCommon.h" />
+    <ClInclude Include="Reference.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
