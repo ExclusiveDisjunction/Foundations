@@ -8,6 +8,6 @@
 
 #ifdef FOUNDATIONSIO_EXPORTS 
 #define IO_API __declspec(dllexport)
-#elif
+#else
 #define IO_API __declspec(dllimport)
 #endif

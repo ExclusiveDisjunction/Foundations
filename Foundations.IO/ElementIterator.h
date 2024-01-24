@@ -11,7 +11,7 @@ namespace Core::IO
 	/// </summary>
 	/// <typeparam name="ElementT">Any type that satsifies the ElementSimilar concept.</typeparam>
 	template<typename ElementT>
-	class IO_API ElementIterator
+	class ElementIterator
 	{
 	private:
 		const void* ParentList = nullptr;
@@ -22,6 +22,36 @@ namespace Core::IO
 			this->Current = Current;
 			this->ParentList = ParentList;
 		}
+		ElementIterator(const ElementIterator<ElementT>& Obj) noexcept
+		{
+			ParentList = Obj.ParentList;
+			Current = Obj.Current;
+		}
+		ElementIterator(ElementIterator<ElementT>&& Obj) noexcept
+		{
+			ParentList = std::exchange(Obj.ParentList, nullptr);
+			Current = std::exchange(Obj.Current, nullptr);
+		}
+		~ElementIterator()
+		{
+			ParentList = Current = nullptr;
+		}
+
+		ElementIterator<ElementT>& operator=(const ElementIterator<ElementT>& Obj) noexcept
+		{
+			ParentList = Obj.ParentList;
+			Current = Obj.Current;
+
+			return *this;
+		}
+		ElementIterator<ElementT>& operator=(ElementIterator<ElementT>& Obj) noexcept
+		{
+			ParentList = std::exchange(Obj.ParentList, nullptr);
+			Current = std::exchange(Obj.Current, nullptr);
+
+			return *this;
+		}
+		
 		
 		using iterator_category = std::bidirectional_iterator_tag;
 		using difference_type = std::size_t;

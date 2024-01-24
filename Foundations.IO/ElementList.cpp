@@ -27,7 +27,17 @@ namespace Core::IO
 		* 1) It exists
 		* 2) It is either unclaimed (parent == nullptr) OR the parent of the Element is the host of this list.
 		*/
-		return New && (New->Parent == nullptr || New->Parent == Host);
+		return New && (New->Parent == nullptr || New->Parent == Host) && !Contains(*New);
+	}
+	bool ElementList::Contains(Element& Obj) const noexcept
+	{
+		for (Element* Curr = First; Curr != nullptr; Curr = Curr->Next)
+		{
+			if (Curr == &Obj)
+				return true;
+		}
+
+		return false;
 	}
 
 	ElementList::iterator ElementList::operator[](size_t i) noexcept
@@ -110,6 +120,7 @@ namespace Core::IO
 			return;
 		else if (First == Last)
 		{
+			First->Next = First->Last = First->Parent = nullptr;
 			delete First;
 			First = Last = nullptr;
 			return;
@@ -120,7 +131,7 @@ namespace Core::IO
 		{
 			Element* temp = current->Next;
 
-			current->Next = current->Last = current->Parent;
+			current->Next = current->Last = current->Parent = nullptr;
 			delete current;
 
 			current = temp;
@@ -132,7 +143,7 @@ namespace Core::IO
 	void ElementList::push_back(Element* New)
 	{
 		if (!CanBeTakenIn(New))
-			throw std::logic_error("ERROR: 'New' is nullptr, OR 'New' is owned by another parent.");
+			throw std::logic_error("ERROR: 'New' is nullptr, 'New' is in this list, OR 'New' is owned by another parent.");
 
 		if (_size == 0)
 		{
@@ -162,7 +173,7 @@ namespace Core::IO
 		if (after == end() || after.getParentList() != this || !CanBeTakenIn(New))
 			throw std::logic_error("ERROR: 'after' is ATE OR 'after' is not part of this list.");
 		if (!CanBeTakenIn(New))
-			throw std::logic_error("ERROR: 'New' is nullptr, OR 'New' is owned by another parent.");
+			throw std::logic_error("ERROR: 'New' is nullptr, 'New' is currently in this list, OR 'New' is owned by another parent.");
 
 		Element* target = &(*after);
 		if (target == Last) //Covers if the _size == 1 && if after is the last element.

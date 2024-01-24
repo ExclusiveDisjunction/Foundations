@@ -1,13 +1,10 @@
 #pragma once
 
 #include "IOCommon.h"
+#include "Element.h"
 
 namespace Core::IO
 {
-	class IO_API Element;
-	class IO_API Reference;
-	class IO_API ReferenceCore;
-
 	/// <summary>
 	/// Represents the data shared by multiple instances of Reference, and is owned by an Element.
 	/// </summary>

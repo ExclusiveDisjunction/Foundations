@@ -7,7 +7,7 @@ namespace Core::IO
 {
 	class IO_API ElementList;
 	template<typename ElementT>
-	class IO_API ElementIterator;
+	class ElementIterator;
 	class IO_API ReferenceCore;
 	class IO_API Reference;
 

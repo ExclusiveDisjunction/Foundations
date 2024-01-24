@@ -56,6 +56,8 @@ namespace Core::IO
 
 		std::size_t count() const noexcept { return _size; }
 
+		bool Contains(Element& Elem) const noexcept;
+
 		/// <summary>
 		/// Fills the list with 'newSize' number of Elements, each with the parent equal to the Host of this list.
 		/// </summary>

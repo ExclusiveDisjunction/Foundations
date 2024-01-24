@@ -7,15 +7,18 @@ namespace Core::IO
 {
 	Element::Element(Element* Parent, bool CanHaveChildren)
 	{
-		if (!Parent || !Parent->SupportsChildren())
-			throw std::logic_error("ERROR: Parent is nullptr, OR Parent does not support children.");
+		if (Parent)
+		{
+			if (!Parent->SupportsChildren())
+				throw std::logic_error("ERROR: The parent is valid, but does not support children.");
 
-		Parent->getChildren().push_back(this);
+			Parent->getChildren().push_back(this);
+		}
 
 		if (CanHaveChildren)
 		{
-			Children = new ElementList(this);
 			State |= ElementState::ES_CanHaveChildren;
+			Children = new ElementList(this);
 		}
 	}
 	Element::~Element()
