@@ -45,8 +45,8 @@ namespace Core::IO
 		Element& operator=(Element&& Obj) noexcept = delete;
 
 		friend IO_API ElementList;
-		friend IO_API ElementIterator<Element>;
-		friend IO_API ElementIterator<const Element>;
+		friend ElementIterator<Element>;
+		friend ElementIterator<const Element>;
 		friend IO_API ReferenceCore;
 
 		std::string getType() const noexcept;
