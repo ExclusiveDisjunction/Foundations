@@ -43,7 +43,10 @@ namespace Core::IO
 		Element(FileInstance* Instance, Element* Parent, bool CanHaveChildren);
 		Element(Element* Parent, bool CanHaveChildren);
 
-		virtual void WriteAttributes(AttributesWriter& out) const {} //Element in base class (unloaded) do not output any properties, rather, the system will copy the attributes over for it.
+		virtual void WriteAttributes(AttributesWriter& out) const {
+			out.WriteKey("Name") << "Your \"Mother\"";
+		} //Element in base class (unloaded) do not output any properties, rather, the system will copy the attributes over for it.
+
 
 	public:
 		Element(Element* Parent) noexcept : Element(Parent, true) {}

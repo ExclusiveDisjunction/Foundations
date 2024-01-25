@@ -41,7 +41,12 @@ namespace Core::IO
 		if (!out.KeyIsActive)
 			throw std::logic_error("ERROR: Key not active!");
 
-		out.out << '"' << Data << '"';
+		out.out << '"';
+
+		for (char item : Data) //Ensures that quotes have an escape before them. This is used by the reading algorithim to differentiate between quotes that define the string & quotes that are internal to the string.
+			(item == '"' ? (out.out << '\\') : out.out) << item;
+
+		out.out << '"';
 		out.CloseKey();
 		return out;
 	}
