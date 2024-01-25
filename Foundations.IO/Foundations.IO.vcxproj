@@ -167,16 +167,20 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="AttributesWriter.cpp" />
     <ClCompile Include="Element.cpp" />
     <ClCompile Include="ElementList.cpp" />
+    <ClCompile Include="FileInstance.cpp" />
     <ClCompile Include="Reference.cpp" />
     <ClCompile Include="ReferenceCore.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="AttributesWriter.h" />
     <ClInclude Include="Constraints.h" />
     <ClInclude Include="Element.h" />
     <ClInclude Include="ElementIterator.h" />
     <ClInclude Include="ElementList.h" />
+    <ClInclude Include="FileInstance.h" />
     <ClInclude Include="IOCommon.h" />
     <ClInclude Include="Reference.h" />
   </ItemGroup>

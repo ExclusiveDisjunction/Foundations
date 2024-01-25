@@ -5,6 +5,8 @@
     <ClCompile Include="Element.cpp" />
     <ClCompile Include="ReferenceCore.cpp" />
     <ClCompile Include="Reference.cpp" />
+    <ClCompile Include="AttributesWriter.cpp" />
+    <ClCompile Include="FileInstance.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="IOCommon.h" />
@@ -13,5 +15,7 @@
     <ClInclude Include="ElementIterator.h" />
     <ClInclude Include="Constraints.h" />
     <ClInclude Include="Reference.h" />
+    <ClInclude Include="AttributesWriter.h" />
+    <ClInclude Include="FileInstance.h" />
   </ItemGroup>
 </Project>

@@ -2,10 +2,15 @@
 
 #include "ElementList.h"
 #include "Reference.h"
+#include "FileInstance.h"
 
 namespace Core::IO
 {
-	Element::Element(Element* Parent, bool CanHaveChildren)
+	Element::Element(Element* Parent, bool CanHaveChildren) : Element(Parent ? Parent->ParentFile : nullptr, Parent, CanHaveChildren)
+	{
+
+	}
+	Element::Element(FileInstance* Inst, Element* Parent, bool CanHaveChildren)
 	{
 		if (Parent)
 		{
@@ -20,6 +25,10 @@ namespace Core::IO
 			State |= ElementState::ES_CanHaveChildren;
 			Children = new ElementList(this);
 		}
+
+		this->ParentFile = Inst;
+		if (Inst)
+			this->ID = Inst->GetNextID();
 	}
 	Element::~Element()
 	{

@@ -1,6 +1,7 @@
 #pragma once
 
 #include "IOCommon.h"
+#include "AttributesWriter.h"
 #include <map>
 
 namespace Core::IO
@@ -10,11 +11,13 @@ namespace Core::IO
 	class ElementIterator;
 	class IO_API ReferenceCore;
 	class IO_API Reference;
+	class IO_API FileInstance;
 
 	enum ElementState
 	{
 		ES_Modified = 1,
-		ES_CanHaveChildren = 2
+		ES_CanHaveChildren = 2,
+		ES_Loaded = 4
 	};
 
 	/// <summary>
@@ -25,6 +28,7 @@ namespace Core::IO
 	private:
 		Element* Parent = nullptr;
 		Element* Next = nullptr, * Last = nullptr;
+		FileInstance* ParentFile = nullptr;
 
 		std::string Type;
 		unsigned int ID = 0;
@@ -32,11 +36,18 @@ namespace Core::IO
 
 		ElementList* Children = nullptr;
 		ReferenceCore* RefCore = nullptr;
+
+		std::streampos Begin = 0, End = 0;
+		std::streampos HBegin = 0, AttrBegin = 0, HEnd = 0;
 	protected:		
+		Element(FileInstance* Instance, Element* Parent, bool CanHaveChildren);
 		Element(Element* Parent, bool CanHaveChildren);
+
+		virtual void WriteAttributes(AttributesWriter& out) const {} //Element in base class (unloaded) do not output any properties, rather, the system will copy the attributes over for it.
 
 	public:
 		Element(Element* Parent) noexcept : Element(Parent, true) {}
+		Element(Element& Parent) noexcept : Element(&Parent, true) {}
 		Element(const Element& Obj) noexcept = delete;
 		Element(Element&& Obj) noexcept = delete;
 		~Element();
@@ -48,6 +59,11 @@ namespace Core::IO
 		friend ElementIterator<Element>;
 		friend ElementIterator<const Element>;
 		friend IO_API ReferenceCore;
+		friend IO_API FileInstance;
+
+		std::pair<std::streampos, std::streampos> GetPositionInFile() const { return std::make_pair(Begin, End); }
+		std::pair<std::streampos, std::streampos> GetHeaderPositionInFile() const { return std::make_pair(HBegin, HEnd); }
+		std::pair<std::streampos, std::streampos> GetAttributesPositionInFile() const { return std::make_pair(AttrBegin, HEnd); }
 
 		std::string getType() const noexcept;
 		unsigned int getID() const noexcept;
