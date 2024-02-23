@@ -11,16 +11,25 @@ namespace Core::IO
 {
 	class IO_API FileInstance
 	{
-	private:
+	public: //FIX
 		std::fstream* fileInst = nullptr;
 		std::string _ThisPath;
 
 		Element* Root = nullptr;
+		ElementIdle* RootIdle = nullptr;
 		void ConstructRoot(bool DeleteIfValid = true);
 
 		unsigned int CurrID = 0;
 
 		bool WriteNode(std::ostream& out, Element& Root, int TabIndex);
+
+		bool GetNodeLocation(std::istream& in, Element& Target);
+		bool ReadNodeHeader(std::istream& in, Element& Target);
+		bool ReadNodeChildren(std::istream& in, Element& Target);
+
+	private:
+		ElementIdle* IdleNode(const Element& Obj) const;
+
 
 		void OpenStream();
 	public:
@@ -35,6 +44,10 @@ namespace Core::IO
 
 		bool WriteToFile();
 		bool LoadFromFile();
+
+		void Idle();
+		bool IsIdling() const;
+		void Awaken();
 
 		Reference getRoot() const;
 		unsigned int GetNextID() { return ++CurrID; }

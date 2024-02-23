@@ -13,6 +13,13 @@ namespace Core::IO
 		if (KeyIsActive)
 			throw std::logic_error("ERROR: Key not closed.");
 
+		auto iter = std::find_if(KeyName.begin(), KeyName.end(), [](char eval) -> bool
+			{
+				return isspace(eval);
+			});
+		if (iter != KeyName.end())
+			throw std::logic_error("ERROR: The key contains white space, and this is not allowed.");
+
 		out << ' ' << KeyName << ':';
 		KeyIsActive = true;
 		return *this;

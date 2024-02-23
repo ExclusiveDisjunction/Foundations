@@ -72,6 +72,7 @@ namespace Core::IO
 		bool IsValid() const noexcept;
 
 		Element& operator*() const;
+		Element* operator->() const;
 		operator bool() const { return IsValid(); }
 	};
 }

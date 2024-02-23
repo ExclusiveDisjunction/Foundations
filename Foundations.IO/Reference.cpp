@@ -68,4 +68,11 @@ namespace Core::IO
 			throw e;
 		}
 	}
+	Element* Reference::operator->() const
+	{
+		if (!IsValid())
+			throw std::logic_error("ERROR: Element cannot be accessed.");
+
+		return TargetCore->Target;
+	}
 }

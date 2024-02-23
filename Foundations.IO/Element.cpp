@@ -21,14 +21,15 @@ namespace Core::IO
 		}
 
 		if (CanHaveChildren)
-		{
-			State |= ElementState::ES_CanHaveChildren;
-			Children = new ElementList(this);
-		}
+			State |= ElementState::ES_CanHaveChildren; //NOTE that this->Children is equal to nullptr UNTIL a child is added, so long as (State & ES_CanHaveChildren) is true.
 
 		this->ParentFile = Inst;
 		if (Inst)
+		{
+			if (Inst->IsIdling())
+				throw std::logic_error("ERROR: Cannot add a new element when the parent file is idling!");
 			this->ID = Inst->GetNextID();
+		}
 	}
 	Element::~Element()
 	{
@@ -43,15 +44,17 @@ namespace Core::IO
 			RefCore->Unbind();
 	}
 
-	std::string Element::getType() const noexcept
+	bool Element::HasChildren() const noexcept { return SupportsChildren() && Children != nullptr && Children->count() != 0; }
+
+	unsigned int Element::getTypeID() const noexcept
 	{
-		return Type;
+		return TypeID;
 	}
 	unsigned int Element::getID() const noexcept
 	{
 		return ID;
 	}
-	unsigned int Element::getState() const noexcept
+	unsigned short Element::getState() const noexcept
 	{
 		return State;
 	}
@@ -84,10 +87,17 @@ namespace Core::IO
 
 		return Last->getReference();
 	}
-	ElementList& Element::getChildren() const
+	ElementList& Element::getChildren()
 	{
 		if (!SupportsChildren())
-			throw std::logic_error("ERROR: Element has no children OR does not support children.");
+			throw std::logic_error("ERROR: This element does not support children.");
+
+		return *(!Children ? (Children = new ElementList(this)) : Children);
+	}
+	const ElementList& Element::getChildren() const
+	{
+		if (!SupportsChildren() || !Children)
+			throw std::logic_error("ERROR: This element does not support children, or the children are not loaded.");
 
 		return *Children;
 	}
