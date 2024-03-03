@@ -1,11 +1,11 @@
 #pragma once
 
-#include "Function.h"
+#include "..\structure\FunctionBase.h"
 #include "CompositeFunction.h"
 
 #include <iostream>
 
-namespace Math::Function
+namespace Core::Function
 {
 	class MATH_LIB Polynomial : public CompositeFunction
 	{

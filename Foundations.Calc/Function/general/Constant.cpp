@@ -1,6 +1,6 @@
-#include "..\CoreFunctions.h"
+#include "CoreFunctions.h"
 
-namespace Math::Function
+namespace Core::Function
 {
 	Constant::Constant(unsigned int InputDim, double A) : FunctionBase(InputDim, 1)
 	{

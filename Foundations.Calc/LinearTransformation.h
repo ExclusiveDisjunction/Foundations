@@ -3,7 +3,7 @@
 #include "Matrix.h"
 #include "MathVector.h"
 
-namespace Math
+namespace Core::Calc
 {
 	class MATH_LIB Linear2dTransformation
 	{

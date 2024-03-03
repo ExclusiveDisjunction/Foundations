@@ -5,7 +5,7 @@
 #include <iostream>
 #include <vector>
 
-namespace Math
+namespace Core::Calc
 {
 	class MATH_LIB Matrix;
 
@@ -62,7 +62,7 @@ namespace Math
 		MathVector& operator/=(double Obj);
 
 		operator double() const;
-		operator Matrix() const;
+		explicit operator Matrix() const;
 
 #ifdef _WINDOWS_
 		operator POINT() const

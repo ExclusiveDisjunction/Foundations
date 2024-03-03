@@ -1,6 +1,6 @@
 #include "RationalFunction.h"
 
-namespace Math::Function
+namespace Core::Function
 {
 	RationalFunction::RationalFunction(unsigned int InputDim) : CompositeFunction(InputDim, 1)
 	{

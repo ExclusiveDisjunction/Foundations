@@ -2,7 +2,7 @@
 
 #include <math.h>
 
-namespace Math::Constants
+namespace Core::Constants
 {
 	//Math Constants
 

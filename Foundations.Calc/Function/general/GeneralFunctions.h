@@ -1,8 +1,8 @@
 #pragma once
 
-#include "..\StdCalc.h"
+#include "..\..\StdCalc.h"
 
-namespace Math::Function
+namespace Core::Function
 {
 	class MATH_LIB FunctionBase;
 

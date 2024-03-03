@@ -2,41 +2,11 @@
 
 using namespace Core;
 
-namespace Math::Function
+namespace Core::Function
 {
 	VectorFunction::VectorFunction(unsigned int InputDim, unsigned int OutputDim) : FunctionBase(InputDim, OutputDim)
 	{
 		Fill(OutputDim);
-	}
-	VectorFunction::VectorFunction(unsigned int InputDim, unsigned int OutputDim, FunctionBase** ToHost) : FunctionBase(InputDim, OutputDim)
-	{
-		Fill(OutputDim);
-
-		for (unsigned int i = 0; i < OutputDim; i++)
-		{
-			if (!ToHost[i] || ToHost[i]->InputDim() != InputDim || ToHost[i]->OutputDim() != 1)
-				continue;
-
-			AssignParent(ToHost[i]);
-			Func[i] = ToHost[i];
-		}
-	}
-	VectorFunction::VectorFunction(unsigned int InputDim, unsigned int OutputDim, Core::SequenceBase<FunctionBase*>* ToHost) : FunctionBase(InputDim, OutputDim)
-	{
-		Fill(OutputDim);
-
-		if (ToHost->Length() != OutputDim)
-			return;
-
-		for (unsigned int i = 0; i < OutputDim; i++)
-		{
-			FunctionBase* Current = ToHost->Item(i);
-			if (!Current || Current->InputDim() != InputDim || Current->OutputDim() != 1)
-				continue;
-
-			AssignParent(Current);
-			Func[i] = Current;
-		}
 	}
 	VectorFunction::~VectorFunction()
 	{
@@ -52,6 +22,7 @@ namespace Math::Function
 		Clear();
 
 		Func = new FunctionBase*[Dim];
+		memset(Func, 0, sizeof(FunctionBase*) * Dim);
 
 		for (unsigned int i = 0; i < Dim; i++)
 			Func[i] = nullptr;

@@ -1,6 +1,6 @@
-#include "..\CoreFunctions.h"
+#include "CoreFunctions.h"
 
-namespace Math::Function
+namespace Core::Function
 {
 	Exponent::Exponent(unsigned int InputDim, unsigned int Var, double A, double B) : Exponent(new Monomial(InputDim, Var), A, B)
 	{

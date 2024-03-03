@@ -2,7 +2,7 @@
 
 #include "Polynomial.h"
 
-namespace Math::Function
+namespace Core::Function
 {
 	MatrixFunction::MatrixFunction(unsigned int Rows, unsigned int Columns) : FunctionBase(Columns, Rows)
 	{

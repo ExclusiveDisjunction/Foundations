@@ -1,6 +1,6 @@
-#include "..\CoreFunctions.h"
+#include "CoreFunctions.h"
 
-namespace Math::Function
+namespace Core::Function
 {
 	PFnMonomial::PFnMonomial(unsigned int InputDim, FunctionBase* B, FunctionBase* N, double A) : FunctionBase(InputDim, 1)
 	{

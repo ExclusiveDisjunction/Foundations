@@ -1,10 +1,10 @@
 #include "GeneralFunctions.h"
 
 #include "CoreFunctions.h"
-#include "Polynomial.h"
-#include "..\Constants.h"
+#include "..\types\Polynomial.h"
+#include "..\..\Constants.h"
 
-namespace Math::Function
+namespace Core::Function
 {
 	FunctionBase* General::Linear(unsigned int Dim, unsigned int Var, double M, double K)
 	{

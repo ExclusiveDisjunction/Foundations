@@ -1,6 +1,6 @@
-#include "..\CoreFunctions.h"
+#include "CoreFunctions.h"
 
-namespace Math::Function
+namespace Core::Function
 {
 	Trig::Trig(unsigned int Function, double A, unsigned int InputDim, unsigned int Var) : Trig(Function, A, new Monomial(InputDim, Var))
 	{

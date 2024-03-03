@@ -3,7 +3,7 @@
 #include "StdCalc.h"
 #include "MathVector.h"
 
-namespace Math
+namespace Core::Calc
 {
 	/// <summary>
 	/// Represents a rectangular arrangment of numbers for calculations, given some row and column definition. 
@@ -36,6 +36,8 @@ namespace Math
 		static Matrix RandomMatrix(unsigned int Rows, unsigned int Columns);
 
 		double* operator[](unsigned int Row) const;
+		double& At(unsigned int Row, unsigned int Column) const;
+		MathVector Select(unsigned int Index, bool IsRow) const;
 
 		Matrix& operator=(const Matrix& Other) noexcept;
 		Matrix& operator=(Matrix&& Other) noexcept;

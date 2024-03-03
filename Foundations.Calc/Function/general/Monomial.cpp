@@ -1,6 +1,6 @@
-#include "..\CoreFunctions.h"
+#include "CoreFunctions.h"
 
-namespace Math::Function
+namespace Core::Function
 {
 	Monomial::Monomial(unsigned int InputDim, unsigned int Var, double A, double N) : FunctionBase(InputDim, 1)
 	{

@@ -1,6 +1,6 @@
 #include "Bezier.h"
 
-namespace Math::Function
+namespace Core::Function
 {
 	BezierMonomial::BezierMonomial(unsigned int Dim, int i, int n, MathVector Target) : FunctionBase(1, Dim), Point(Target)
 	{
@@ -32,30 +32,15 @@ namespace Math::Function
 		return Return;
 	}
 
-	Bezier::Bezier(unsigned int Dim, unsigned int Rank) : FunctionBase(1, Dim)
+	Polynomial* MakeBezier(unsigned int Dim, unsigned int Rank, const std::vector<MathVector>& points)
 	{
-		//No other items needed.
-	}
-	Bezier::Bezier(unsigned int Dim, unsigned int Rank, MathVector Obj[]) : FunctionBase(1, Dim)
-	{
-		Segments = new Polynomial(1, Dim);
-		for (int i = 0; i < Rank; i++)
-			Segments->AddFunction(new BezierMonomial(Dim, i, Rank, Obj[i]));
-	}
-	Bezier::~Bezier()
-	{
-		delete Segments;
-	}
+		if (points.size() != Rank)
+			return nullptr;
 
-	MathVector Bezier::Evaluate(const MathVector& T, bool& Exists) const
-	{
-		if (T.Dim() != 1 || T < 0.0f || T > 1.0f)
-		{
-			Exists = false;
-			return MathVector::ErrorVector();
-		}
+		Polynomial* Return = new Polynomial(1, Dim);
+		for (size_t i = 0; i < points.size(); i++)
+			Return->AddFunction(new BezierMonomial(Dim, i, Rank, points[i]));
 
-		Exists = true;
-		return Segments->Evaluate(T, Exists);
+		return Return;
 	}
 }

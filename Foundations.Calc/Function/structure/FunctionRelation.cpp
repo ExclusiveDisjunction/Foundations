@@ -1,30 +1,13 @@
 #include "FunctionRelation.h"
 #include "FunctionBase.h"
 
-namespace Math::Function
+namespace Core::Function
 {
-	FunctionRelationSeg::FunctionRelationSeg(FunctionBase* Target, FunctionRelationSeg* Next, FunctionRelationSeg* Previous) : Next(Next), Previous(Previous), Target(Target)
-	{
-
-	}
-	FunctionRelationSeg::~FunctionRelationSeg()
-	{
-		if (DeleteOnDeallocate)
-		{
-			if (Target)
-				delete Target;
-
-			Target = nullptr;
-		}
-
-		Next = Previous = nullptr;
-	}
-
 	FunctionRelation::FunctionRelation()
 	{
 		First = nullptr;
 		Last = nullptr;
-		ParentObject = nullptr;
+		Parent = nullptr;
 		Size = 0;
 	}
 	FunctionRelation::~FunctionRelation()

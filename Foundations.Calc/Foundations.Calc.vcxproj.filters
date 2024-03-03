@@ -18,7 +18,7 @@
     <ClCompile Include="dllmain.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Function\FunctionBase.cpp">
+    <ClCompile Include="Function\structure\FunctionBase.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="StdCalc.cpp">
@@ -30,81 +30,75 @@
     <ClCompile Include="MathVector.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Function\FunctionRelation.h">
+    <ClCompile Include="Function\types\VectorFunction.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Function\VectorFunction.cpp">
+    <ClCompile Include="Function\types\MatrixFunction.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Function\MatrixFunction.cpp">
+    <ClCompile Include="Function\types\RationalFunction.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Function\CompositeFunction.cpp">
+    <ClCompile Include="Function\types\Polynomial.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Function\RationalFunction.cpp">
+    <ClCompile Include="Function\general\Monomial.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Function\Polynomial.cpp">
+    <ClCompile Include="Function\general\Constant.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Function\Core Functions Code\Monomial.cpp">
+    <ClCompile Include="Function\general\FnMonomial.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Function\Core Functions Code\Constant.cpp">
+    <ClCompile Include="Function\general\PFnMonomial.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Function\Core Functions Code\FnMonomial.cpp">
+    <ClCompile Include="Function\general\AbsoluteValue.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Function\Core Functions Code\PFnMonomial.cpp">
+    <ClCompile Include="Function\general\Exponent.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Function\Core Functions Code\AbsoluteValue.cpp">
+    <ClCompile Include="Function\general\Logarithm.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Function\Core Functions Code\Exponent.cpp">
+    <ClCompile Include="Function\general\Trig.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Function\Core Functions Code\Logarithm.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Function\Core Functions Code\Trig.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Function\FunctionRelation.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Function\GeneralFunctions.cpp">
+    <ClCompile Include="Function\general\GeneralFunctions.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="LinearTransformation.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Function\Bezier.cpp">
+    <ClCompile Include="Function\general\Bezier.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Function\structure\FunctionIterator.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Function\RationalFunction.h">
+    <ClInclude Include="Function\types\RationalFunction.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Function\CompositeFunction.h">
+    <ClInclude Include="Function\types\CompositeFunction.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Function\CoreFunctions.h">
+    <ClInclude Include="Function\general\CoreFunctions.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Function\Function.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Function\FunctionBase.h">
+    <ClInclude Include="Function\structure\FunctionBase.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Function\GeneralFunctions.h">
+    <ClInclude Include="Function\general\GeneralFunctions.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Function\Polynomial.h">
+    <ClInclude Include="Function\types\Polynomial.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Constants.h">
@@ -119,16 +113,19 @@
     <ClInclude Include="StdCalc.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Function\MatrixFunction.h">
+    <ClInclude Include="Function\types\MatrixFunction.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Function\VectorFunction.h">
+    <ClInclude Include="Function\types\VectorFunction.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="LinearTransformation.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Function\Bezier.h">
+    <ClInclude Include="Function\general\Bezier.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Function\structure\FunctionIterator.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

@@ -1,6 +1,6 @@
-#include "..\CoreFunctions.h"
+#include "CoreFunctions.h"
 
-namespace Math::Function
+namespace Core::Function
 {
 	Logarithm::Logarithm(double A, double B, FunctionBase* N) : FunctionBase(!N ? 0 : N->InputDim(), 1)
 	{

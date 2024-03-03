@@ -1,6 +1,6 @@
-#include "..\CoreFunctions.h"
+#include "CoreFunctions.h"
 
-namespace Math::Function
+namespace Core::Function
 {
 	FnMonomial::FnMonomial(unsigned int InputDim, unsigned int Var) : FnMonomial(new Monomial(InputDim, Var), 1, 1)
 	{

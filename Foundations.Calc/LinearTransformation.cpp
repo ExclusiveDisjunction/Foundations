@@ -1,6 +1,6 @@
 #include "LinearTransformation.h"
 
-namespace Math
+namespace Core::Calc
 {
 	Linear2dTransformation::Linear2dTransformation()
 	{

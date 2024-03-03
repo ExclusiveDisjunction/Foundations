@@ -1,6 +1,6 @@
-#include "..\CoreFunctions.h"
+#include "CoreFunctions.h"
 
-namespace Math::Function
+namespace Core::Function
 {
 	AbsoluteValue::AbsoluteValue(unsigned int InputDim, unsigned int Var, double A) : AbsoluteValue(new Monomial(InputDim, Var), A)
 	{

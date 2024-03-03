@@ -1,6 +1,6 @@
 #include "Polynomial.h"
 
-namespace Math::Function
+namespace Core::Function
 {
 	Polynomial::Polynomial(unsigned int InputDim, unsigned int OutputDim) : CompositeFunction(InputDim, OutputDim)
 	{

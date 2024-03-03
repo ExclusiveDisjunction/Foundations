@@ -1,9 +1,9 @@
 #pragma once
 
-#include "FunctionBase.h"
+#include "..\structure\FunctionBase.h"
 #include "VectorFunction.h"
 
-namespace Math::Function
+namespace Core::Function
 {
 	class MATH_LIB MatrixFunction : public FunctionBase
 	{

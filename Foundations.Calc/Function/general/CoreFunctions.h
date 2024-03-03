@@ -1,8 +1,8 @@
 #pragma once
 
-#include "FunctionBase.h"
+#include "..\structure\FunctionBase.h"
 
-namespace Math::Function
+namespace Core::Function
 {
 	class MATH_LIB Constant : public FunctionBase
 	{
