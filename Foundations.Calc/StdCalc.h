@@ -2,10 +2,18 @@
 
 #include <math.h>
 
+#ifdef _MSC_VER //Maintains code if gcc is used instead of MSVC.
+
 #ifdef MATH_EXPORTS
 #define MATH_LIB _declspec(dllexport)
 #else
 #define MATH_LIB _declspec(dllexport)
+#endif
+
+#else
+
+#define MATH_LIB 
+
 #endif
 
 namespace Core::Calc
