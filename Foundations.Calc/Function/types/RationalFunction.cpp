@@ -1,12 +1,14 @@
 #include "RationalFunction.h"
 
-namespace Core::Function
+#include "..\general\CoreFunctions.h"
+
+namespace Core::Calc::Function
 {
-	RationalFunction::RationalFunction(unsigned int InputDim) : CompositeFunction(InputDim, 1)
+	RationalFunction::RationalFunction(unsigned int InputDim) : FunctionBase(InputDim, 1)
 	{
 
 	}
-	RationalFunction::RationalFunction(FunctionBase* Obj) : CompositeFunction(!Obj ? 0 : Obj->InputDim(), 1)
+	RationalFunction::RationalFunction(FunctionBase* Obj) : FunctionBase(!Obj ? 0 : Obj->InputDim())
 	{
 		MultiplyFunction(Obj);
 	}
@@ -20,52 +22,46 @@ namespace Core::Function
 		if (!Obj || Obj->InputDim() != InputDim() || Obj->OutputDim() != 1)
 			return;
 
-		FunctionRelationSeg* Seg = new FunctionRelationSeg(Obj, nullptr, nullptr);
-		AssignParent(Obj);
-		PushChild(Seg);
+		FunctionBase::PushChild(Obj);
 	}
 	void RationalFunction::DivideFunction(FunctionBase* Obj)
 	{
 		if (!Obj || Obj->InputDim() != InputDim() || Obj->OutputDim() != 1)
 			return;
 
-		FunctionRelationSeg* Seg = new FunctionRelationSeg(Obj, nullptr, nullptr);
-		AssignParent(Obj);
-		Seg->Flag |= RationalFuncFlag::Inverted;
-
-		PushChild(Seg);
+		//We must invert the function
+		FunctionBase* Inverted = new FnMonomial(Obj, 1, -1);
+		MultiplyFunction(Inverted);
 	}
 
 	MathVector RationalFunction::Evaluate(const MathVector& X, bool& Exists) const
 	{
 		Exists = true;
-		if (this->Size == 0)
+		if (this->ChildCount() == 0)
 		{
 			Exists = false;
 			return MathVector::ErrorVector();
 		}
 
-		double Return = 1;
-		for (FunctionRelationSeg* Current = First; Current != nullptr; Current = Current->Next)
+		MathVector Output(1);
+		for (const_iterator curr = begin(), end = this->end(); curr != end; curr++)
 		{
-			if (!Current->Target || Current->Target->InputDim() != InputDim())
+			try
+			{
+				MathVector Result = curr->Evaluate(Obj, Exists);
+				if (!Exists)
+					return MathVector::ErrorVector();
+
+				Output += Result;
+			}
+			catch (...)
 			{
 				Exists = false;
 				return MathVector::ErrorVector();
 			}
-
-			MathVector Result = Current->Target->Evaluate(X, Exists);
-			if (!Exists)
-				return MathVector::ErrorVector();
-
-			double Value = Result;
-			if (Current->Flag & RationalFuncFlag::Inverted)
-				Value = 1 / Value;
-
-			Return *= Value;
 		}
 
-		return MathVector(1, Return);
+		return Output;
 	}
 
 	bool RationalFunction::EquatesTo(FunctionBase* const& Obj) const

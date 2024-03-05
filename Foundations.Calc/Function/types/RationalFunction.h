@@ -1,66 +1,41 @@
 #pragma once
 
 #include "..\structure\FunctionBase.h"
-#include "CompositeFunction.h"
 
 #include <iostream>
 
-namespace Core::Function
+namespace Core::Calc::Function
 {
-	class MATH_LIB RationalFunction : public CompositeFunction
+	class MATH_LIB RationalFunction : public FunctionBase
 	{
 	public:
-		enum RationalFuncFlag
-		{
-			Inverted = 1
-		};
-
 		RationalFunction(unsigned int InputDim);
 		RationalFunction(FunctionBase* Obj);
 		template<std::convertible_to<FunctionBase*>... Args>
-		RationalFunction(unsigned int Dim, Args... Objs) : CompositeFunction(Dim, 1)
+		RationalFunction(unsigned int Dim, Args... Objs) : RationalFunction(Dim)
 		{
 			std::vector<FunctionBase*> Func = std::vector<FunctionBase*>({ (static_cast<FunctionBase*>(Objs))... });
 			if (Func.size() == 0)
 				return;
 
-			for (FunctionBase* Obj : { Func... })
-			{
-				if (Obj->InputDim() != Dim || Obj->OutputDim() != 1)
-					continue;
-
-				MultiplyFunction(Obj);
-			}
+			for (FunctionBase* Obj : Func)
+				FunctionBase::PushChild(Obj);
 		}
+		RationalFunction(const RationalFunction& Obj) = delete;
+		RationalFunction(RationalFunction&& Obj) = delete;
 		~RationalFunction();
+
+		RationalFunction& operator=(const RationalFunction& Obj) = delete;
+		RationalFunction& operator=(const RationalFunction& Obj) = delete;
 
 		void MultiplyFunction(FunctionBase* Obj);
 		template<std::convertible_to<FunctionBase*>... Args>
 		void MultiplyFunctions(Args... Obj)
 		{
-			unsigned int Dim = InputDim();
+			std::vector<FunctionBase*> Conv = std::vector<FunctionBase*>({ ((FunctionBase*)Obj)... });
 
-			FunctionRelationSeg* Current = Last;
-			for (FunctionBase* Item : { ((FunctionBase*)Obj)... })
-			{
-				if (!Item || Item->InputDim() != Dim)
-					continue;
-
-				FunctionRelationSeg* Seg = new FunctionRelationSeg(Obj, nullptr, nullptr);
-				AssignParent(Obj);
-
-				if (Current)
-					Current->Next = Seg;
-				Seg->Previous = Current;
-
-				if (First == nullptr)
-					First = Seg;
-				
-				Current = Seg;
-				Size++;
-			}
-
-			Last = Current;
+			for (FunctionBase* Item : Conv)
+				FunctionBase::PushChild(Item);
 		}
 		void DivideFunction(FunctionBase* Obj);
 

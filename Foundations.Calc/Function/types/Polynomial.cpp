@@ -1,15 +1,15 @@
 #include "Polynomial.h"
 
-namespace Core::Function
+namespace Core::Calc::Function
 {
-	Polynomial::Polynomial(unsigned int InputDim, unsigned int OutputDim) : CompositeFunction(InputDim, OutputDim)
+	Polynomial::Polynomial(unsigned int InputDim, unsigned int OutputDim) : FunctionBase(InputDim, OutputDim)
 	{
 
 	}
-	Polynomial::Polynomial(FunctionBase* Obj) : CompositeFunction(!Obj ? 0 : Obj->InputDim(), !Obj ? 0 : Obj->OutputDim())
+	Polynomial::Polynomial(FunctionBase* Obj) : Polynomial(!Obj ? 0 : Obj->InputDim(), !Obj ? 0 : Obj->OutputDim())
 	{
 		if (!Obj)
-			throw std::exception("The provided function cannot be nullptr.");
+			throw std::logic_error("The provided function cannot be nullptr.");
 
 		AddFunction(Obj);
 	}
@@ -23,106 +23,59 @@ namespace Core::Function
 		if (!Obj || Obj->InputDim() != InputDim())
 			return;
 
-		FunctionRelationSeg* Seg = new FunctionRelationSeg(Obj, nullptr, nullptr);
-		AssignParent(Obj);
-		PushChild(Seg);
+		FunctionBase::PushChild(Obj);
 	}
 	void Polynomial::SubtractFunction(FunctionBase* Obj)
 	{
 		if (!Obj || Obj->InputDim() != InputDim() || Obj->OutputDim() != OutputDim())
 			return;
 
-		FunctionRelationSeg* Seg = new FunctionRelationSeg(Obj, nullptr, nullptr);
-		AssignParent(Obj);
-		Seg->Flag = PolynomialFlag::Negated;
-
-		PushChild(Seg);
+		if (FunctionBase::PushChild(Obj))
+			Obj->operator-();
 	}
 
 	MathVector Polynomial::Evaluate(const MathVector& Obj, bool& Exists) const
 	{
 		Exists = true;
-		if (this->Size == 0)
+		if (this->ChildCount() == 0)
 		{
 			Exists = false;
 			return MathVector::ErrorVector();
 		}
 
 		MathVector Output(OutputDim());
-		for (FunctionRelationSeg* Current = First; Current != nullptr; Current = Current->Next)
+		for (const_iterator curr = begin(), end = this->end(); curr != end; curr++)
 		{
-			if (!Current->Target || Current->Target->OutputDim() != OutputDim())
+			try
+			{
+				MathVector Result = curr->Evaluate(Obj, Exists);
+				if (!Exists)
+					return MathVector::ErrorVector();
+
+				Output += Result;
+			}
+			catch (...)
 			{
 				Exists = false;
 				return MathVector::ErrorVector();
 			}
-
-			MathVector Result = Current->Target->Evaluate(Obj, Exists);
-			if (!Exists)
-				return MathVector::ErrorVector();
-
-			Result *= static_cast<double>(Current->Flag & PolynomialFlag::Negated ? -1 : 1);
-			Output += Result;
 		}
 
 		return Output;
 	}
 
-	bool Polynomial::EquatesTo(FunctionBase* const& Obj) const
-	{
-		Polynomial* Conv = dynamic_cast<Polynomial*>(Obj);
-		if (!Conv)
-			return false;
-
-		if (Conv->InputDim() != InputDim() || Conv->Size != Size)
-			return false;
-
-		bool Return = true;
-		for (FunctionRelationSeg* CurrentH = First, *CurrentO = Conv->First; CurrentH != nullptr && CurrentO != nullptr; CurrentH = CurrentH->Next, CurrentO = CurrentO->Next)
-			Return &= CurrentH->Target && CurrentH->Target->EquatesTo(CurrentO->Target) && CurrentH->Flag == CurrentO->Flag;
-
-		return Return;
-	}
-	bool Polynomial::ComparesTo(FunctionBase* const& Obj) const
-	{
-		Polynomial* Conv = dynamic_cast<Polynomial*>(Obj);
-		if (!Conv)
-			return false;
-
-		if (Conv->InputDim() != InputDim() || Conv->Size != Size)
-			return false;
-
-		bool Return = true;
-		for (FunctionRelationSeg* CurrentH = First, *CurrentO = Conv->First; CurrentH != nullptr && CurrentO != nullptr; CurrentH = CurrentH->Next, CurrentO = CurrentO->Next)
-			Return &= CurrentH->Target && CurrentH->Target->ComparesTo(CurrentO->Target) && CurrentH->Flag == CurrentO->Flag;
-
-		return Return;
-	}
-
 	FunctionBase* Polynomial::Clone() const
 	{
-		if (Size == 0)
-			return new Polynomial(InputDim(), OutputDim());
-
 		Polynomial* Return = new Polynomial(InputDim(), OutputDim());
-		FunctionRelationSeg* Current, * Temp = nullptr;
-		for (Current = this->First; Current != nullptr; Current = Current->Next)
+		try
 		{
-			FunctionRelationSeg* Other = new FunctionRelationSeg(Current->Target, nullptr, nullptr);
-			Other->Flag = Current->Flag;
-
-			if (Temp)
-				Temp->Next = Other;
-			Other->Previous = Temp;
-
-			if (Return->First != nullptr)
-				Return->First = Other;
-
-			Temp = Other;
-			Return->Size++;
+			CloneBase(Return);
+		}
+		catch (std::exception& e)
+		{
+			throw e;
 		}
 
-		Return->Last = Temp;
 		return Return;
 	}
 }

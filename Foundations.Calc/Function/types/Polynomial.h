@@ -1,34 +1,23 @@
 #pragma once
 
 #include "..\structure\FunctionBase.h"
-#include "CompositeFunction.h"
 
 #include <iostream>
 
-namespace Core::Function
+namespace Core::Calc::Function
 {
-	class MATH_LIB Polynomial : public CompositeFunction
+	class MATH_LIB Polynomial : public FunctionBase
 	{
 	public:
-		enum PolynomialFlag
-		{
-			Negated = 1
-		};
-
 		Polynomial(unsigned int InputDim, unsigned int OutputDim);
 		Polynomial(FunctionBase* Obj);
 		template<std::convertible_to<FunctionBase*>... Args>
-		Polynomial(unsigned int InputDim, unsigned int OutputDim, Args... Objs) : CompositeFunction(InputDim, OutputDim)
+		Polynomial(unsigned int InputDim, unsigned int OutputDim, Args... Objs) : Polynomial(InputDim, OutputDim)
 		{
 			std::vector<FunctionBase*> Func = std::vector<FunctionBase*>({ (static_cast<FunctionBase*>(Objs))... });
-			if (Func.size() == 2)
-				return;
 
 			for (FunctionBase* Item : Func)
-			{
-				if (Item->InputDim() == InputDim && Item->OutputDim() == OutputDim)
-				this->AddFunction(Item);
-			}
+				FunctionBase::PushChild(Item);
 		}
 		Polynomial(const Polynomial& Obj) = delete;
 		Polynomial(Polynomial&& Obj) = delete;
@@ -43,27 +32,8 @@ namespace Core::Function
 		{
 			std::vector<FunctionBase*> Conv = std::vector<FunctionBase*>({ ((FunctionBase*)Obj)... });
 
-			FunctionRelationSeg* Current = Last;
 			for (FunctionBase* Item : Conv)
-			{
-				if (!Item || Item->InputDim() != InputDim() || Item->OutputDim() != OutputDim())
-					continue;
-
-				FunctionRelationSeg* Seg = new FunctionRelationSeg(Obj, nullptr, nullptr);
-				AssignParent(Obj);
-
-				if (Current)
-					Current->Next = Seg;
-				Seg->Previous = Current;
-
-				if (First == nullptr)
-					First = Seg;
-
-				Current = Seg;
-				Size++;
-			}
-
-			Last = Current;
+				FunctionBase::PushChild(Item);
 		}
 		void SubtractFunction(FunctionBase* Obj);
 		template<std::convertible_to<FunctionBase*>... Args>
@@ -71,28 +41,11 @@ namespace Core::Function
 		{
 			std::vector<FunctionBase*> Conv = std::vector<FunctionBase*>({ ((FunctionBase*)Obj)... });
 
-			FunctionRelationSeg* Current = First;
 			for (FunctionBase* Item : Conv)
 			{
-				if (!Item || Item->InputDim() != InputDim() || Item->OutputDim() != OutputDim())
-					continue;
-
-				FunctionRelationSeg* Seg = new FunctionRelationSeg(Obj, nullptr, nullptr);
-				AssignParent(Obj);
-
-				Seg->Flag = PolynomialFlag::Negated;
-				if (Current)
-					Current->Next = Seg;
-				Seg->Previous = Current;
-
-				if (First == nullptr)
-					First = Seg;
-
-				Current = Seg;
-				Size++;
+				if (FunctionBase::PushChild(Item))
+					Item->operator-();
 			}
-			
-			Last = Current;
 		}
 
 		MathVector Evaluate(const MathVector& Obj, bool& Exists) const override;

@@ -21,8 +21,8 @@ namespace Core::Calc::Function
 		using iterator_tag = std::random_access_iterator_tag;
 		using difference_type = std::size_t;
 		using value_type = FunctionBase;
-		using pointer = value_type*;
-		using reference = value_type&;
+		using pointer = FunctionBase*;
+		using reference = FunctionBase&;
 
 		reference operator*();
 		const reference operator*() const;
@@ -50,16 +50,55 @@ namespace Core::Calc::Function
 		bool operator!=(const FunctionIterator& obj) const;
 	};
 
-	template<typename T> requires std::is_base_of<FunctionBase, T>::value
-	class CastedFunctionIterator
+	class MATH_LIB ConstFunctionIterator
 	{
 	private:
 		FunctionIterator iter;
 	public:
-		CastedFunctionIterator(const FunctionIterator i) : iter(i) {}
+		ConstFunctionIterator(FunctionIterator iter);
 
-		using iterator_tag = FunctionIterator::iterator_tag;
-		using difference_type = FunctionIterator::difference_type;
+		using iterator_category = std::random_access_iterator_tag;
+		using iterator_tag = std::random_access_iterator_tag;
+		using difference_type = std::size_t;
+		using value_type = const FunctionBase;
+		using pointer = value_type*;
+		using reference = value_type&;
+
+		reference operator*() const;
+		pointer operator->() const;
+
+		difference_type operator-(const ConstFunctionIterator& obj) const;
+		ConstFunctionIterator& operator[](difference_type diff);
+
+		ConstFunctionIterator& operator++();
+		ConstFunctionIterator operator++(int);
+		ConstFunctionIterator& operator--();
+		ConstFunctionIterator operator--(int);
+
+		ConstFunctionIterator operator+(difference_type diff) const;
+		ConstFunctionIterator& operator+=(difference_type diff);
+		ConstFunctionIterator operator-(difference_type diff) const;
+		ConstFunctionIterator& operator-=(difference_type diff);
+
+		bool operator<(const ConstFunctionIterator& obj) const;
+		bool operator>(const ConstFunctionIterator& obj) const;
+		bool operator<=(const ConstFunctionIterator& obj) const;
+		bool operator>=(const ConstFunctionIterator& obj) const;
+
+		bool operator==(const ConstFunctionIterator& obj) const;
+		bool operator!=(const ConstFunctionIterator& obj) const;
+	};
+
+	template<typename T, typename IterT>
+	class CastedFunctionIterator
+	{
+	private:
+		IterT iter;
+	public:
+		CastedFunctionIterator(const IterT i);
+
+		using iterator_tag = IterT::iterator_tag;
+		using difference_type = IterT::difference_type;
 		using value_type = T;
 		using pointer = value_type*;
 		using reference = value_type&;
@@ -69,26 +108,26 @@ namespace Core::Calc::Function
 		const reference operator*() const;
 		pointer operator->() const;
 
-		difference_type operator-(const CastedFunctionIterator<T>& obj) const;
-		CastedFunctionIterator<T>& operator[](difference_type diff);
+		difference_type operator-(const CastedFunctionIterator<T, IterT>& obj) const;
+		CastedFunctionIterator<T, IterT>& operator[](difference_type diff);
 
-		CastedFunctionIterator<T>& operator++();
-		CastedFunctionIterator<T> operator++(int);
-		CastedFunctionIterator<T>& operator--();
-		CastedFunctionIterator<T> operator--(int);
+		CastedFunctionIterator<T, IterT>& operator++();
+		CastedFunctionIterator<T, IterT> operator++(int);
+		CastedFunctionIterator<T, IterT>& operator--();
+		CastedFunctionIterator<T, IterT> operator--(int);
 
-		CastedFunctionIterator<T> operator+(difference_type diff) const;
-		CastedFunctionIterator<T>& operator+=(difference_type diff);
-		CastedFunctionIterator<T> operator-(difference_type diff) const;
-		CastedFunctionIterator<T>& operator-=(difference_type diff);
+		CastedFunctionIterator<T, IterT> operator+(difference_type diff) const;
+		CastedFunctionIterator<T, IterT>& operator+=(difference_type diff);
+		CastedFunctionIterator<T, IterT> operator-(difference_type diff) const;
+		CastedFunctionIterator<T, IterT>& operator-=(difference_type diff);
 
-		bool operator<(const CastedFunctionIterator<T>& obj) const;
-		bool operator>(const CastedFunctionIterator<T>& obj) const;
-		bool operator<=(const CastedFunctionIterator<T>& obj) const;
-		bool operator>=(const CastedFunctionIterator<T>& obj) const;
+		bool operator<(const CastedFunctionIterator<T, IterT>& obj) const;
+		bool operator>(const CastedFunctionIterator<T, IterT>& obj) const;
+		bool operator<=(const CastedFunctionIterator<T, IterT>& obj) const;
+		bool operator>=(const CastedFunctionIterator<T, IterT>& obj) const;
 
-		bool operator==(const CastedFunctionIterator<T>& obj) const;
-		bool operator!=(const CastedFunctionIterator<T>& obj) const;
+		bool operator==(const CastedFunctionIterator<T, IterT>& obj) const;
+		bool operator!=(const CastedFunctionIterator<T, IterT>& obj) const;
 	};
 }
 

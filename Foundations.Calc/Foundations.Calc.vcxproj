@@ -192,6 +192,7 @@
     <ClCompile Include="Function\general\Logarithm.cpp" />
     <ClCompile Include="Function\general\PFnMonomial.cpp" />
     <ClCompile Include="Function\general\Trig.cpp" />
+    <ClCompile Include="Function\structure\ConstFunctionIterator.cpp" />
     <ClCompile Include="Function\structure\FunctionBase.cpp" />
     <ClCompile Include="Function\general\GeneralFunctions.cpp" />
     <ClCompile Include="Function\types\MatrixFunction.cpp" />
@@ -230,6 +231,13 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
     </None>
+    <ClCompile Include="Function\structure\CastedFunctionIterator.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <FileType>Document</FileType>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+    </ClCompile>
     <None Include="TODO.md" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

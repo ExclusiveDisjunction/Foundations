@@ -2,7 +2,7 @@
 
 #include "..\structure\FunctionBase.h"
 
-namespace Core::Function
+namespace Core::Calc::Function
 {
 	class MATH_LIB Constant : public FunctionBase
 	{

@@ -78,6 +78,10 @@
     <ClCompile Include="Function\structure\FunctionIterator.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Function\structure\CastedFunctionIterator.cpp" />
+    <ClCompile Include="Function\structure\ConstFunctionIterator.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Function\types\RationalFunction.h">

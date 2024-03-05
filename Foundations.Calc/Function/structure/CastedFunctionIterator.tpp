@@ -19,7 +19,7 @@ namespace Core::Calc::Function
         }
     }
     template <typename T>
-    CastedFunctionIterator<T>::reference CastedFunctionIterator<T>::operator*()
+    typename CastedFunctionIterator<T>::reference CastedFunctionIterator<T>::operator*()
     {
         try
         {
@@ -31,7 +31,7 @@ namespace Core::Calc::Function
         }
     }
     template <typename T>
-    const CastedFunctionIterator<T>::reference CastedFunctionIterator<T>::operator*() const
+    const typename CastedFunctionIterator<T>::reference CastedFunctionIterator<T>::operator*() const
     {
         try
         {
@@ -43,7 +43,7 @@ namespace Core::Calc::Function
         }
     }
     template <typename T>
-    CastedFunctionIterator<T>::pointer CastedFunctionIterator<T>::operator->() const
+    typename CastedFunctionIterator<T>::pointer CastedFunctionIterator<T>::operator->() const
     {
         try
         {
@@ -56,7 +56,7 @@ namespace Core::Calc::Function
     }
 
     template <typename T>
-    CastedFunctionIterator<T>::difference_type CastedFunctionIterator<T>::operator-(const CastedFunctionIterator<T> &obj) const
+    typename CastedFunctionIterator<T>::difference_type CastedFunctionIterator<T>::operator-(const CastedFunctionIterator<T> &obj) const
     {
         return iter - obj.iter;
     }

@@ -26,6 +26,12 @@ namespace Core::Calc::Function
 		bool PopChild(FunctionBase* Obj, bool DeleteFunc = true);
 		void ClearChildren();
 
+		/// <summary>
+		/// Used to copy over the members of FunctionBase to a cloned function. Derived classes should call this when Clone is called. If an error occurs, the function will delete Into and throw the error.
+		/// </summary>
+		/// <param name="Into"></param>
+		void CloneBase(FunctionBase* Into) const;
+
 	public:
 		FunctionBase(const FunctionBase& Obj) = delete;
 		FunctionBase(FunctionBase&& Obj) = delete;
@@ -34,21 +40,15 @@ namespace Core::Calc::Function
 		friend FunctionIterator;
 
 		using iterator = FunctionIterator;
-		using const_iterator = const FunctionIterator;
+		using const_iterator = ConstFunctionIterator;
 
 		FunctionBase& operator=(const FunctionBase& Obj) = delete;
 		FunctionBase& operator=(FunctionBase&& Obj) = delete;
 
 		double A = 1.0;
 
-		bool CanHaveChildren() const { return AllowedChildCount() != 0; }
-		virtual unsigned AllowedChildCount() const = 0;
-		virtual bool AllowsChildAppend() const = 0;
-		void RemoveParent();
-
-		bool AddChild(FunctionBase* Obj);
-		bool RemoveChild(FunctionBase* Child, bool Delete = true);
-
+		void DetachFromParent();
+		unsigned ChildCount() const noexcept { return CHCount; }
 		iterator ChildAt(unsigned i) noexcept;
 		const_iterator ChildAt(unsigned i) const noexcept;
 
@@ -66,6 +66,6 @@ namespace Core::Calc::Function
 		virtual bool EquatesTo(FunctionBase* const& Obj) const;
 		virtual FunctionBase* Clone() const = 0;
 
-		virtual FunctionBase& operator-();
+		FunctionBase& operator-();
 	};
 }

@@ -27,7 +27,7 @@ namespace Core::Calc::Function
 	}
 	bool FunctionBase::PushChild(FunctionBase* Obj)
 	{
-		if (!Obj)
+		if (!Obj || Obj->_Input != _Input || Obj->_Output != _Output)
 			return false;
 
 		if (!LastCh)
@@ -42,6 +42,7 @@ namespace Core::Calc::Function
 			LastCh = LastCh->Next = Obj;
 		}
 
+		AssignParent(Obj);
 		CHCount++;	
 		return true;
 	}
@@ -68,6 +69,12 @@ namespace Core::Calc::Function
 		CHCount--;
 		if (Delete)
 			delete Obj;
+		else
+		{
+			Obj->Next = nullptr;
+			Obj->Prev = nullptr;
+			Obj->Parent = nullptr;
+		}
 		return true;
 	}
 	void FunctionBase::ClearChildren()
@@ -83,30 +90,12 @@ namespace Core::Calc::Function
 		FirstCh = LastCh = nullptr;
 		CHCount = 0;
 	}
-	void FunctionBase::RemoveParent()
+	void FunctionBase::DetachFromParent()
 	{
 		if (!Parent)
 			return;
 
 		Parent->PopChild(this, false);
-	}
-	bool FunctionBase::AddChild(FunctionBase* Obj)
-	{
-		if (!Obj)
-			return false;
-
-		return PushChild(Obj);
-	}
-	bool FunctionBase::RemoveChild(FunctionBase* Child, bool Delete)
-	{
-		try
-		{
-			return PopChild(Child, Delete);
-		}
-		catch (std::logic_error& e)
-		{
-			throw e;
-		}
 	}
 
 	FunctionBase::iterator FunctionBase::ChildAt(unsigned i) noexcept
@@ -155,8 +144,8 @@ namespace Core::Calc::Function
 		if (!Obj)
 			return false;
 
-		bool Return = Obj->_Input == _Input && Obj->_Output == _Output && Obj->AllowedChildCount() == AllowedChildCount();
-		if (Return && AllowedChildCount() != 0)
+		bool Return = Obj->_Input == _Input && Obj->_Output == _Output && CHCount == Obj->CHCount;
+		if (Return && CHCount)
 		{
 			FunctionBase* currT = FirstCh,
 				* currO = Obj->FirstCh;
@@ -176,8 +165,8 @@ namespace Core::Calc::Function
 		if (!Obj)
 			return false;
 
-		bool Return = Obj->_Input == _Input && Obj->_Output == _Output && Obj->AllowedChildCount() == AllowedChildCount();
-		if (Return && AllowedChildCount() != 0)
+		bool Return = Obj->_Input == _Input && Obj->_Output == _Output && CHCount == Obj->CHCount;
+		if (Return && CHCount)
 		{
 			FunctionBase* currT = FirstCh,
 				* currO = Obj->FirstCh;
@@ -191,6 +180,35 @@ namespace Core::Calc::Function
 		}
 
 		return true;
+	}
+	void FunctionBase::CloneBase(FunctionBase* Into) const
+	{
+		if (!Into || Into->_Input != _Input || Into->_Output != _Output)
+			throw std::logic_error("Dimension mismatch with clone.");
+		
+		try
+		{
+			auto curr = begin(), end = this->end();
+			for (; curr != end; curr++)
+			{
+				FunctionBase* temp = curr->Clone();
+				temp->Prev = Into->LastCh;
+
+				if (Into->LastCh)
+					Into->LastCh = Into->LastCh->Next = temp;
+				else //First element
+					Into->FirstCh = Into->LastCh = temp;
+			}
+		}
+		catch(std::exception& e)
+		{
+			delete Into;
+			throw e;
+		}
+
+		Into->A = A;
+		Into->CHCount = CHCount;
+		Into->Next = Into->LastCh = Into->Parent = nullptr;
 	}
 
 	FunctionBase& FunctionBase::operator-()
