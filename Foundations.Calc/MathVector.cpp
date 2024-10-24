@@ -1,7 +1,7 @@
 #include "MathVector.h"
 #include "Matrix.h"
 
-namespace Math
+namespace Core::Calc
 {
 	MathVector::MathVector(unsigned int Dim, double Val)
 	{

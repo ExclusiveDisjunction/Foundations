@@ -1,6 +1,6 @@
 #include "Matrix.h"
 
-namespace Math
+namespace Core::Calc
 {
 	Matrix::Matrix(unsigned int Rows, unsigned int Columns, double Value)
 	{
@@ -97,6 +97,34 @@ namespace Math
 			return nullptr;
 
 		return Data[Row];
+	}
+	double& Matrix::At(unsigned int Row, unsigned int Col) const
+	{
+		if (Row >= _Rows || Col >= _Columns)
+			throw std::logic_error("Out of bounds.");
+
+		return (*this)[Row][Col];
+	}
+	MathVector Matrix::Select(unsigned int Index, bool IsRow) const
+	{
+		if (IsRow)
+		{
+			if (Index >= _Rows)
+				return MathVector::ErrorVector();
+
+			return MathVector(_Columns, Data[Index]);
+		}
+		else
+		{
+			if (Index >= _Columns)
+				return MathVector::ErrorVector();
+
+			MathVector Return(Index);
+			for (unsigned int i = 0; i < _Rows; i++)
+				Return[i] = Data[i][Index];
+		}
+
+		return MathVector::ErrorVector();
 	}
 
 	Matrix& Matrix::operator=(const Matrix& Other) noexcept
